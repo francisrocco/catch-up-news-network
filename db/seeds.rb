@@ -14,19 +14,35 @@
 require 'faker'
 
 
-# making users
+# makin' users
 user = User.create(name: "George", email: "george@thebeatles.com")
 user = User.create(name: "John", email: "john@thebeatles.com")
 user = User.create(name: "Ringo", email: "ringo@thebeatles.com")
 user = User.create(name: "Paul", email: "paul@thebeatles.com")
 
-# I hard-coded the email addresses because I had a hunch they ought to be unique
-User.create(name: Faker::Pokemon.name.downcase + "gurl_" + Faker::Number.number(4), email: honeybear@booboo.com )
-User.create(name: Faker::Pokemon.name.downcase + "_gurl" + Faker::Number.number(3), email: diamond@rock.com )
-User.create(name: Faker::Pokemon.name.downcase + "gurl_" + Faker::Number.number(6), email: cowssaymoo@gmail.com )
+# makin' more users
+gurlz = []
 
-5.times do 
+15.times do 
+	gurlz << User.new(name: Faker::Pokemon.name.downcase + "gUR1_" + Faker::Number.between(111, 528))
+end
 
-User.new(name: Faker::)
+# makin' unique email addys
+gurlz.each do |gurl|
+	gurl.email = Faker::Internet.safe_email(gurl.name)
+	gurl.save
+end
 
+
+# makin' a few more users
+boiz = []
+
+15.times do 
+	boiz << User.new(name: Faker::StarWars.character.downcase.split.join("_") + "_b0i__" + Faker::Number.between(13, 721).to_s)
+end
+
+# making email addys
+boiz.each do |boi|
+	boi.email = Faker::Internet.safe_email(boi.name)
+	boi.save
 end
