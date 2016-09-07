@@ -15,10 +15,10 @@ require 'faker'
 
 
 # makin' users
-user = User.create(name: "George", email: "george@thebeatles.com")
-user = User.create(name: "John", email: "john@thebeatles.com")
-user = User.create(name: "Ringo", email: "ringo@thebeatles.com")
-user = User.create(name: "Paul", email: "paul@thebeatles.com")
+user = User.create(name: "George", email: "george@thebeatles.com", password: "password")
+user = User.create(name: "John", email: "john@thebeatles.com", password: "password")
+user = User.create(name: "Ringo", email: "ringo@thebeatles.com", password: "password")
+user = User.create(name: "Paul", email: "paul@thebeatles.com", password: "password")
 
 # makin' more users
 gurlz = []
