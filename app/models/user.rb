@@ -7,4 +7,12 @@ class User < ApplicationRecord
   has_many :comments
 	has_secure_password
 
+	def followers
+		self.followships.collect { |follower| follower  }
+	end
+
+	def following
+		self.followships.collect { |following| following  }
+	end
+
 end
