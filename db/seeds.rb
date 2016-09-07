@@ -1,20 +1,6 @@
-
-  # create_table "posts", force: :cascade do |t|
-  #   t.string   "title"
-  #   t.string   "link"
-  #   t.datetime "created_at", null: false
-  #   t.datetime "updated_at", null: false
-  # end
-
-  # create_table "users", force: :cascade do |t|
-  #   t.string   "name"
-  #   t.string   "email"
-  #   t.datetime "created_at", null: false
-  #   t.datetime "updated_at", null: false
 require 'faker'
 
-
-# makin' users
+# makin' users (name:, email:, password:)
 user = User.create(name: "George", email: "george@thebeatles.com", password: "password")
 user = User.create(name: "John", email: "john@thebeatles.com", password: "password")
 user = User.create(name: "Ringo", email: "ringo@thebeatles.com", password: "password")
@@ -23,8 +9,8 @@ user = User.create(name: "Paul", email: "paul@thebeatles.com", password: "passwo
 # makin' more users
 gurlz = []
 
-15.times do 
-	gurlz << User.new(name: Faker::Pokemon.name.downcase + "gUR1_" + Faker::Number.between(111, 528))
+20.times do 
+	gurlz << User.new(name: Faker::Pokemon.name.downcase + "_gUR1_" + Faker::Number.between(111, 528).to_s, password: "password")
 end
 
 # makin' unique email addys
@@ -37,12 +23,21 @@ end
 # makin' a few more users
 boiz = []
 
-15.times do 
-	boiz << User.new(name: Faker::StarWars.character.downcase.split.join("_") + "_b0i__" + Faker::Number.between(13, 721).to_s)
+20.times do 
+	boiz << User.new(name: Faker::StarWars.character.downcase.split.join("_") + "_b0i__" + Faker::Number.between(131, 721).to_s, password: "password")
 end
 
 # making email addys
 boiz.each do |boi|
 	boi.email = Faker::Internet.safe_email(boi.name)
 	boi.save
+end
+
+
+# Assigning posts to users
+User.all.each do |user|
+	user.posts.build(title: "#{Faker::Number.between(7, 34).to_s} Unbelievable Ways #{Faker::Hipster.word.capitalize} #{Faker::Music.instrument.pluralize} Are Wrecking Your Marriage", link: Faker::Internet.url)
+	user.posts.build(title: "#{Faker::Number.between(7, 34).to_s} Salads That Improve Your #{Faker::Music.instrument} Playing", link: Faker::Internet.url)
+	user.posts.build(title: "Love #{Faker::Hacker.noun.capitalize.pluralize}? Here's #{Faker::Number.between(999, 3099).to_s} Simple Crafts You Can Make With Your Kids!", link: Faker::Internet.url)
+	user.save
 end
