@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5)
+    @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
   def show
@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post)
     else
