@@ -1,0 +1,45 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h4><%= link_to 'Catch Up', root_path %><h4>
+    </div>
+    <br>
+    <% if logged_in? %>
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'New post', new_post_path %></li>
+        <!-- This can change when we deploy, but for now... -->
+        <li><%= link_to "Browse Other User Profiles", users_path %></li>
+        <li><%= link_to 'Log out', logout_path, method: :delete %></li> 
+      </ul>
+        <ul class="nav navbar-nav">
+          <li>
+            <%= link_to('', class: 'btn btn-small dropdown-toggle',
+              'data-toggle' => 'dropdown') do %> 
+               Hi <%= current_user.name %> 
+               <span class= 'caret' > </span>
+            <% end %>
+          <ul class='dropdown-menu'>
+            <li> 
+              <%= link_to edit_user_path(current_user) do %>
+                  edit profile
+              <% end %>
+            </li>
+            <li> 
+              <%= link_to user_path(current_user) do %>
+                  view profile
+              <% end %> 
+            </li>
+            
+          </ul>
+        </ul>
+    <% else %>
+      <ul class="nav navbar-nav navbar-right">
+        <li> <%= link_to "Sign-up", signup_path %></li>
+        <li> <%= link_to "Log-in", login_path %></li>
+      </ul>
+     </div>
+   <% end %>
+  </div>
+</nav>
+
+

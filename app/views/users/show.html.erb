@@ -1,0 +1,45 @@
+<h1><%= @user.name %></h1>
+
+<div id="notice">
+<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
+	<% flash[:notice] = "" %>
+<% end %>
+</div>
+
+<!-- this doesn't work yet because i'm too tired... -->
+
+<!-- i'm stalking you! -->
+<% if current_user.following.any? {|following| following.follower_id == @user.id} %>
+
+	<!-- YR STALKING ME TOO? -->
+	<% if current_user.followers.any? {|follower| follower.following_id == @user.id} %>
+		<!-- SO LETS BE FRENDS -->
+		<p>You're both friends!</p>
+	<% end %>
+
+	<% else %>
+		<!-- i no like you, but you like me... -->
+		<% if @user.following.any? {|following| following.follower_id == current_user.id} %>
+			<p><%= @user.name %> is following you...</p>
+			<!-- oh maybe you like me, ok, fine... -->
+		<% else %>
+			<p>You're following <%= @user.name %>!</p>
+		<% end %>
+<% end %>
+
+
+
+
+
+
+
+<br>
+
+<% if @user.posts %>
+	<h2><%= @user.name %>'s Posts</h2>
+	<% @user.posts.each do |post| %>
+		<li><%= link_to post.title, post.link %></li>
+		<%= render partial: 'comments/form', locals: {post: post} %>
+	<% end %>
+<% end %>

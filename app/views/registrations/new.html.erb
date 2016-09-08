@@ -1,10 +1,16 @@
+<div class='well'>
 <%=form_for User.new, url: signup_path do |f| %>
+<div class='control-group'>
 	<%= f.label :name %>
 	<%= f.text_field :name %>
+</div>
+<div class='control-group'>
 	<%= f.label :email %>
 	<%= f.text_field :email %>
+</div>
+<div class='control-group'>
 	<%= f.label :password %>
 	<%= f.password_field :password %>
-
-	<%= f.submit "Create User" %>
+</div>
+	<%= f.submit "Create User", class: 'btn-btn-primary'%>
 <% end %>
