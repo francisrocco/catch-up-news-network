@@ -18,10 +18,11 @@ class Post < ApplicationRecord
 
   def description
     desc = self.thumbnail.description
-    if desc.length < 100
+    desc = self.title if self.thumbnail.images.first.src.to_s[-3..-1] != "jpg"
+    if desc.length < 120
       return desc
     else
-      return desc[0..97] + "..."
+      return desc[0..117] + "..."
     end
   end
 
