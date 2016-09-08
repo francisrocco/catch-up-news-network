@@ -9,10 +9,10 @@ class Post < ApplicationRecord
 
   def post_title
     title = self.thumbnail.title
-    if title.length < 40
+    if title.length < 35
       return title
     else
-      return title[0..37] + "..."
+      return title[0..33] + "..."
     end
   end
 
