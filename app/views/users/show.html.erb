@@ -7,39 +7,39 @@
 <% end %>
 </div>
 
-<!-- this doesn't work yet because i'm too tired... -->
+<% if current_user.following?(@user) %>
 
-<!-- i'm stalking you! -->
-<% if current_user.following.any? {|following| following.follower_id == @user.id} %>
-
-	<!-- YR STALKING ME TOO? -->
-	<% if current_user.followers.any? {|follower| follower.following_id == @user.id} %>
-		<!-- SO LETS BE FRENDS -->
+	<% if current_user.followed_by?(@user) %>
 		<p>You're both friends!</p>
+	<% else %>
+		<p>You're following <%= @user.name %>!</p>
 	<% end %>
 
 	<% else %>
-		<!-- i no like you, but you like me... -->
-		<% if @user.following.any? {|following| following.follower_id == current_user.id} %>
-			<p><%= @user.name %> is following you...</p>
-			<!-- oh maybe you like me, ok, fine... -->
-		<% else %>
-			<p>You're following <%= @user.name %>!</p>
+		<% if @user.following?(current_user) %>
+			<p><%= @user.name %> is following you!</p>
 		<% end %>
+
 <% end %>
-
-
-
-
-
-
 
 <br>
 
 <% if @user.posts %>
 	<h2><%= @user.name %>'s Posts</h2>
 	<% @user.posts.each do |post| %>
-		<li><%= link_to post.title, post.link %></li>
+		<li><div><%= link_to post.title, post.link, target: "_blank" %>
+		  <h3>Tags for this Post:</h3>
+  				<% post.tags.each do |tag| %>
+  		<li><%= tag.name %></li>
+  			<% end %>
+						<h3>Comments</h3>
+						<ul id="Comments">
+						<% post.comments.each do |comment| %>
+
+						<li><%= comment.message %></li>
+						<% end %></ul>
+
+		</div></li>
 		<%= render partial: 'comments/form', locals: {post: post} %>
 	<% end %>
 <% end %>
