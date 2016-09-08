@@ -12,3 +12,8 @@
 
 
 <h2>People You're Following</h2>
+<ul>
+<% current_user.following.each do |following| %>
+	<li><%= link_to following.name, user_path(following) %></li>
+<% end %>
+</ul>

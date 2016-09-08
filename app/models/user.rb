@@ -25,12 +25,14 @@ class User < ApplicationRecord
 		followships.collect do |followship|
 			followship.following
 		end
-
 	end
 
 	# return everyone that a user is following
 	def following
-		Followship.where(follower_id: self.id)
+		followships = Followship.where(follower_id: self.id)
+		followships.collect do |followship|
+			followship.follower
+		end
 	end
 
 	# self.following?(user)
