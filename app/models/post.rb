@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   end
 
   def post_title
-    title = self.thumbnail.title
+    return self.title unless title = self.thumbnail.title
     if title.length < 35
       return title
     else
@@ -18,10 +18,11 @@ class Post < ApplicationRecord
 
   def description
     desc = self.thumbnail.description
-    if desc.length < 100
+    desc = self.title if self.thumbnail.images.first.src.to_s[-3..-1] != "jpg"
+    if desc.length < 120
       return desc
     else
-      return desc[0..97] + "..."
+      return desc[0..117] + "..."
     end
   end
 
@@ -30,7 +31,12 @@ class Post < ApplicationRecord
   end
 
   def image
-    self.thumbnail.images.first.src.to_s
+    img = self.thumbnail.images.first.src.to_s
+    if img[-3..-1] != "jpg"
+      return "http://img00.deviantart.net/4854/i/2013/352/8/1/newspaper_collage_texture_by_flordeneu-d6yeuvs.jpg"
+    else
+      return img
+    end
   end
 
 end

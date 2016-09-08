@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :authorize_user, :logged_in?
 
 	def home
-	  render '/index'
+    if current_user
+      render '/index'
+    else
+      render '/sessions/new'
+    end
 	end
 
 	def current_user
