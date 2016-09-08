@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :authorize_user, :logged_in?
+  helper_method :current_user, :authorize_user, :logged_in?, :link_to_blank
 
 	def home
 	  render '/index'
@@ -20,5 +20,17 @@ class ApplicationController < ActionController::Base
 	   redirect_to '/index'
 	  end
 	end
+
+	def link_to_blank(name = nil, options = nil, html_options = nil, &block)
+  target_blank = {target: "_blank"}
+  if block_given?
+    options ||= {}
+    options = options.merge(target_blank)
+  else
+    html_options ||= {}
+    html_options = html_options.merge(target_blank)
+  end
+  link_to(name, options, html_options, &block)
+end
 
 end
