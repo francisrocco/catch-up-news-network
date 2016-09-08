@@ -39,7 +39,7 @@
 <% if @user.posts %>
 	<h2><%= @user.name %>'s Posts</h2>
 	<% @user.posts.each do |post| %>
-		<li><%= link_to post.title, post.link %></li>
+		<li><%= link_to post.title, post.link, target: "_blank" %></li>
 		<%= render partial: 'comments/form', locals: {post: post} %>
 	<% end %>
 <% end %>
