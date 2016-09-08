@@ -1,0 +1,14 @@
+<h1>Welcome, <%= current_user %>!</h1>
+<p>What would you like to do?</p>
+
+
+
+<h2>Your Followers</h2>
+<ul>
+<% current_user.followers.each do |follower| %>
+	<li><%= link_to follower.name, user_path(follower) %></li>
+<% end %>
+</ul>
+
+
+<h2>People You're Following</h2>

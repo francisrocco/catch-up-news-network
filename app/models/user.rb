@@ -16,9 +16,16 @@ class User < ApplicationRecord
   end
 
   # think of 'following' as 'followee' and it makes sense to Tamtam
-	# return all of a user's followers user.followers =>
-	def followers
-		Followship.where(following_id: self.id)
+
+	# return all of a user's followers (user.followers => [an array])
+		def followers
+		# getting Followship instances
+		followships = Followship.where(following_id: self.id)
+		# getting the User instances from the Followship instance
+		followships.collect do |followship|
+			followship.following
+		end
+
 	end
 
 	# return everyone that a user is following
