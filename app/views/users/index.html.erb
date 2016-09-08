@@ -1,0 +1,9 @@
+<h1>Who's Online?</h1>
+
+
+<ul>
+<% @users.each do |user| %>
+	<!-- on profile, we can decide how much we reveal to the current user! ooooohhhh some ankle, huh? -->
+	<li><strong><%= link_to user.name, user_path(user) %></strong> | <%= link_to 'Follow This User', follow_path(user) %></li>
+<% end %>
+</ul>

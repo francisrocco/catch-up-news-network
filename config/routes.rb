@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
 
-
   root 'application#home'
 
   get '/login' => 'sessions#new'
@@ -12,5 +11,10 @@ Rails.application.routes.draw do
   get '/signup', to: 'registrations#new',  as: 'signup'
 
   post '/signup', to: 'registrations#create'
+
+  get '/users/:id/follow', to: 'followships#follow', as: 'follow'
+
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
