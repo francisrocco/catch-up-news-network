@@ -3,5 +3,6 @@
 <%= f.text_area :title %><br>
 <%= f.label :link %>
 <%= f.text_area :link %><br>
+<%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
 <%= f.submit %>
 <% end %>
