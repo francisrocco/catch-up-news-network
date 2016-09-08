@@ -1,13 +1,2 @@
-<h1><%= @post.title %></h1>
-<%= link_to @post.title, @post.link %>
 
-<!-- USING THUMBNAILER -->
-
-<%= @post.post_title %><br>
-<%= @post.description %><br>
-<img src="<%= @post.image %>"><br>
-
-
-<!-- USING ONEBOX -->
-
-<%= @post.preview.html_safe %>
+<%= render 'thumbnail' %>
