@@ -30,10 +30,17 @@ a {
     padding: 10px;
 }
 
-.caption{
+.bottom-portion{
   position: absolute;
-  bottom:0;
-  padding: 10px;
+  bottom:0px;
+  padding: 5px 10px;
+  width: 450px;
+  max-height:95px;
+}
+
+.caption {
+  position: absolute;
+  bottom: 35px;
 }
 
 .button {
@@ -47,16 +54,10 @@ a {
     font-size: 12px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 32px
+    border-radius: 32px;
 }
 
-.votes {
-    position: absolute;
-    bottom: 17px;
-}
 </style>
-
-
 
 <div class='thumbnail'>
   <a target="_blank" href="<%= post.link %>">
@@ -64,27 +65,26 @@ a {
     <img src="<%= post.image %>" width="450">
       <div class='headline'>
           <div class='short' color='black'><h3><%= post.post_title %></h3></div>
-      </div>
     </div>
-    <div class='caption'>
-      <%= post.description %><br>
+  </div>
+  <div class="caption">
+    <%= post.description %><br>
+  </div>
+  <div class='vote-arrows pull-left bottom-portion'>
+    <span id= "voteUp">
+      <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post %>
+    </span>
+    &nbsp
+    <strong><%= post.total_votes %></strong>
+    &nbsp
+    <span id= "myToolTip" >
+      <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post  %>
+    </span>
+    &nbsp
+    <% post.tags.each do |tag| %>
+      <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
+    <% end %>
+  </div>
 
-      <div class="vote-arrows votes pull-left">
-        <span id= "voteUp">
-          <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post %>
-        </span>
-        &nbsp
-        <strong><%= post.total_votes %></strong>
-        &nbsp
-        <span id= "myToolTip" >
-          <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post  %>
-        </span>
-      </div>
-      &nbsp
-      &nbsp
-      <% post.tags.each do |tag| %>
-        <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
-      <% end %>
-    </div>
   </a>
 </div>
