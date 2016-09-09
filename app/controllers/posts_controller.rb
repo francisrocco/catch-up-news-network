@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show]
+  before_action :authorize_user, except: :index
 
   def new
     @post = Post.new
   end
 
   def index
-
     @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.creator = current_user
     if @post.save
       redirect_to user_path(current_user)
     else
@@ -25,6 +26,7 @@ class PostsController < ApplicationController
   end
  
   def edit
+
   end
 
   def update

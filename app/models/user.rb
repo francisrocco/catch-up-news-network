@@ -6,6 +6,8 @@ class User < ApplicationRecord
 	has_many :posts
     has_many :comments
 	has_secure_password
+    validates :email, uniqueness: true
+
 
 	# current user follows a new user: current_user.follow(user) => current user is now following user
   def follow(user)

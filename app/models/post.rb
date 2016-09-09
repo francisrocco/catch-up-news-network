@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :votes, dependent: :destroy
   accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
+  validates_presence_of :link
 
   def thumbnail
     @thumbnail ||= LinkThumbnailer.generate(self.link)
