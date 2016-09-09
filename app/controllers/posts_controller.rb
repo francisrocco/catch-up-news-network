@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
 
   def index
+
     @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    byebug
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
@@ -22,12 +24,13 @@ class PostsController < ApplicationController
       render :new
     end
   end
-
+ 
   def edit
   end
 
   def update
   end
+
 
   def destroy
   end
@@ -39,7 +42,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, tag_ids: [])
+    params.require(:post).permit(:title, :link, tag_ids: [], :tags_attributes => [:name])
   end
 
 end
