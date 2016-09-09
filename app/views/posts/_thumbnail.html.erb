@@ -49,6 +49,11 @@ a {
     cursor: pointer;
     border-radius: 32px
 }
+
+.votes {
+    position: absolute;
+    bottom: 17px;
+}
 </style>
 
 
@@ -63,6 +68,20 @@ a {
     </div>
     <div class='caption'>
       <%= post.description %><br>
+
+      <div class="vote-arrows votes pull-left">
+        <span id= "voteUp">
+          <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post %>
+        </span>
+        &nbsp
+        <strong><%= post.total_votes %></strong>
+        &nbsp
+        <span id= "myToolTip" >
+          <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post  %>
+        </span>
+      </div>
+      &nbsp
+      &nbsp
       <% post.tags.each do |tag| %>
         <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
       <% end %>
