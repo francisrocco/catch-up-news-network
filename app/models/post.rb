@@ -6,11 +6,11 @@ class Post < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   def thumbnail
-    @object = LinkThumbnailer.generate(self.link)
+    @thumbnail ||= LinkThumbnailer.generate(self.link)
   end
 
   def post_title
-    return self.title unless title = @object.title
+    return self.title unless title = thumbnail.title
     if title.length < 35
       return title
     else
@@ -19,8 +19,8 @@ class Post < ApplicationRecord
   end
 
   def description
-    desc = @object.description
-    desc = self.title if @object.images.first.src.to_s[-3..-1] != "jpg"
+    desc = thumbnail.description
+    desc = self.title if thumbnail.images.first.src.to_s[-3..-1] != "jpg"
     if desc.length < 120
       return desc
     else
@@ -29,12 +29,12 @@ class Post < ApplicationRecord
   end
 
   def favicon
-    @object.favicon
+    thumbnail.favicon
   end
 
   def image
-    @object = LinkThumbnailer.generate(self.link)
-    img = @object.images.first.src.to_s
+    thumbnail = LinkThumbnailer.generate(self.link)
+    img = thumbnail.images.first.src.to_s
     if img[-3..-1] != "jpg"
       return "http://img00.deviantart.net/4854/i/2013/352/8/1/newspaper_collage_texture_by_flordeneu-d6yeuvs.jpg"
     else
