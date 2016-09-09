@@ -2,7 +2,8 @@
 <p>What would you like to do?</p>
 
 <ul>
-<% if current_user.has_following? %>
+<!-- if current user has followers -->
+<% if current_user.has_followers? %>
 	<h2>Your Followers</h2>
 	<% current_user.followers.each do |follower| %>
 		<li><%= link_to follower.name, user_path(follower) %></li>
@@ -12,7 +13,8 @@
 	<h2>Nobody is Following You! 😞 Time to Go to Cool School! 😍</h2>
 <% end %>
 
-<% if current_user.has_followers? %>
+<!-- if current user is following people -->
+<% if current_user.has_following? %>
 	<h2>People You're Following</h2>
 	<ul>
 	<% current_user.following.each do |following| %>
