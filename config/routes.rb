@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :users
-  resources :posts
+  resources :posts do
+  post '/up-vote' => 'votes#up_vote', as: :up_vote
+  post '/down-vote' => 'votes#down_vote', as: :down_vote
+  end
+  
   resources :comments, only: [:new, :create]
+
   resources :tags, only: [:show]
 
   root 'application#home'
@@ -16,7 +21,6 @@ Rails.application.routes.draw do
 
   get '/users/:id/follow', to: 'followships#follow', as: 'follow'
 
-
-
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

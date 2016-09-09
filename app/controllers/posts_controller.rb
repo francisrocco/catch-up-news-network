@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
 
   def index
+
     @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
@@ -22,12 +23,13 @@ class PostsController < ApplicationController
       render :new
     end
   end
-
+ 
   def edit
   end
 
   def update
   end
+
 
   def destroy
   end
