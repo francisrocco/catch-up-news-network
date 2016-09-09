@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
 	# current user follows a new user: current_user.follow(user) => current user is now following user
   def follow(user)
-    new_relationship = Followship.new(follower_id: self.id, following_id: user.id)
+    new_relationship = Followship.new(following_id: user.id, follower_id: self.id)
     if new_relationship.save
       return true
     else
@@ -37,6 +37,7 @@ class User < ApplicationRecord
 	# end
 
 	# self.following?(user) => is self following user?
+
 	# def following?(user)
 	# 	return true ? following : false
 	# end
@@ -61,6 +62,7 @@ class User < ApplicationRecord
 	# 		return false
 	# 	end
 	# end
+
 
 
 end
