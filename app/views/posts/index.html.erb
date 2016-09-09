@@ -3,4 +3,17 @@
 <%= @posts.each_with_index do |post, idx| %>
   <%= post.title %>
   <%= link_to post.title, post.link %><br>
+
+  <div class="vote-arrows pull-left">
+    <span id= "voteUp"> 
+      <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post %>  
+      </span>
+    &nbsp
+      <span id= "myToolTip" > 
+      <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post  %>
+        </span>
+  </div> &nbsp
+
+<strong> =  &nbsp<%= post.total_votes %></strong>
+
 <% end %>

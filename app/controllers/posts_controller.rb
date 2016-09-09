@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-  end
+  end  
 
   def show
     @post = Post.find(params[:id])
@@ -21,12 +21,13 @@ class PostsController < ApplicationController
       render :new
     end
   end
-
+ 
   def edit
   end
 
   def update
   end
+
 
   def destroy
   end
