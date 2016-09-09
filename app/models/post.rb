@@ -3,7 +3,8 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :comments
   accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
-
+  has_many :votes, dependent: :destroy
+  
   def thumbnail
     object = LinkThumbnailer.generate(self.link)
   end
@@ -39,5 +40,21 @@ class Post < ApplicationRecord
       return img
     end
   end
+
+  #Methods for Votes function
+
+  def up_votes
+    self.votes.where(value: 1).count
+  end
+
+  def down_votes
+    self.votes.where(value: -1).count
+  end
+ 
+  def total_votes
+    self.up_votes - self.down_votes
+  end  
+
+  
 
 end
