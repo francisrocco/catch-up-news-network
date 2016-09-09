@@ -1,19 +1,24 @@
 <h1>Welcome, <%= current_user.name %>!</h1>
 <p>What would you like to do?</p>
 
-
-
-<h2>Your Followers</h2>
 <ul>
-<% current_user.followers.each do |follower| %>
-	<li><%= link_to follower.name, user_path(follower) %></li>
-<% end %>
+<% if current_user.has_following? %>
+	<h2>Your Followers</h2>
+	<% current_user.followers.each do |follower| %>
+		<li><%= link_to follower.name, user_path(follower) %></li>
+	<% end %>
 </ul>
-
-
-<h2>People You're Following</h2>
-<ul>
-<% current_user.following.each do |following| %>
-	<li><%= link_to following.name, user_path(following) %></li>
+<% else %>
+	<h2>Nobody is Following You! 😞 Time to Go to Cool School! 😍</h2>
 <% end %>
+
+<% if current_user.has_followers? %>
+	<h2>People You're Following</h2>
+	<ul>
+	<% current_user.following.each do |following| %>
+		<li><%= link_to following.name, user_path(following) %></li>
+	<% end %>
 </ul>
+<% else %>
+	<h2>You Aren't Following Anybody! 😞 Go Find Buddies! 😍</h2>
+<% end %>
