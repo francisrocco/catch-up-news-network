@@ -58,6 +58,11 @@ class Post < ApplicationRecord
     self.up_votes - self.down_votes
   end
 
+  def self.most_popular
+    Post.joins(:votes).group('posts.id').order('SUM(votes.value) DESC')
+  end
+
+
 
 
 end
