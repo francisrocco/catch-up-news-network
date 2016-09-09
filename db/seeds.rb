@@ -41,3 +41,17 @@ User.all.each do |user|
 	user.posts.build(title: "Love #{Faker::Hacker.noun.capitalize.pluralize}? Here's #{Faker::Number.between(999, 3099).to_s} Simple Crafts You Can Make With Your Kids!", link: "http://www.theonion.com/article/horrible-facebook-algorithm-accident-results-expos-53841")
 	user.save
 end
+
+# create tags
+Tag.create(name: "funny")
+Tag.create(name: "cats")
+Tag.create(name: "dogs")
+Tag.create(name: "gross")
+Tag.create(name: "political")
+Tag.create(name: "flatiron")
+Tag.create(name: "beyonce")
+Tag.create(name: "helpful")
+
+Post.all.each do |post|
+	post.tags = Tag.all.sample(2)
+end

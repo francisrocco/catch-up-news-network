@@ -6,8 +6,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
-  end  
+
+    @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+  end
 
   def show
     @post = Post.find(params[:id])
@@ -15,8 +16,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     if @post.save
-      redirect_to post_path(@post)
+      redirect_to user_path(current_user)
     else
       render :new
     end
@@ -39,7 +41,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link)
+    params.require(:post).permit(:title, :link, tag_ids: [])
   end
 
 end

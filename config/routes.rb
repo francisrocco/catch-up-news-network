@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
   
   resources :comments, only: [:new, :create]
-  
+
+  resources :tags, only: [:show]
+
   root 'application#home'
 
   get '/login' => 'sessions#new'
