@@ -3,6 +3,13 @@
 <%= f.text_area :title %><br>
 <%= f.label :link %>
 <%= f.text_area :link %><br>
-<%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  <div class="field">
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
+    <%= f.fields_for(:tags, Tag.new) do |tag_form| %>
+      <p>Add a new tag:</p><br>
+      <%= tag_form.label :name %>
+      <%= tag_form.text_field :name %>
+    <% end %>
+  </div>
 <%= f.submit %>
 <% end %>

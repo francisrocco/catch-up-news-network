@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    byebug
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
@@ -39,7 +40,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, tag_ids: [])
+    params.require(:post).permit(:title, :link, tag_ids: [], :tags_attributes => [:name])
   end
 
 end
