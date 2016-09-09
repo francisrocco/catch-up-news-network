@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :comments, only: [:new, :create]
+  resources :tags, only: [:show]
 
   root 'application#home'
 

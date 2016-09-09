@@ -3,10 +3,6 @@
 
 <% @posts.each do |post| %>
   <%= render partial: 'thumbnail', locals: {post: post} %>
-  <h3>Tags for this Post:</h3>
-  <% post.tags.each do |tag| %>
-  <li><%= tag.name %></li>
-  <% end %>
 <% end %>
 
 <%= will_paginate @posts %>
