@@ -1,12 +1,7 @@
 class User < ApplicationRecord
-  has_many :followships, foreign_key: 'follower_id'
-
-  # has_many :followers, through: :followerships, class_name: 'User'
-  # has_many :followings, through: :watchers, foreign_key: 'following_id'
-
 	has_many :votes, dependent: :destroy
 	has_many :posts
-    has_many :comments
+  has_many :comments
 	has_secure_password
 
 	# current user follows a new user: current_user.follow(user) => current user is now following user
@@ -19,19 +14,15 @@ class User < ApplicationRecord
     end
   end
 
-  # think of 'following' as 'followee' and it makes sense to Tamtam
-
-	def followers
-		# self.class.joins(:followships).where(followships: {following_id: self.id})
-		Followship.where(following_id: u.id).pluck(:follower_id)
-		
-	end
+	# return everyone following the user
+  def followers
+  	self.class.find_by_sql(['SELECT * FROM users JOIN followships ON users.id = followships.following_id WHERE followships.following_id = ?', self.id])
+  end
 
 	# return everyone that a user is following
-	def following
-		# self.class.joins(:followships).where(followships: {follower_id: self.id})
-		Followship.where(follower_id: u.id).pluck(:following_id)
-	end
+  def following
+    self.class.find_by_sql(["SELECT * FROM users JOIN followships ON users.id = followships.following_id WHERE followships.follower_id = ?", self.id])
+  end
 
 	# self.following?(user) => is self following user?
 	def following?(user)
@@ -51,10 +42,12 @@ class User < ApplicationRecord
 		end
 	end
 
+	# is anyone following self?
 	def has_followers?
 	 self.followers.size > 0
 	end
 
+	# is self following anyone?
 	def has_following?
 	 self.following.size > 0
 	end
@@ -66,6 +59,5 @@ class User < ApplicationRecord
 			return false
 		end
 	end
-
 
 end
