@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action :set_post
+  before_action :set_limit_vote
 
 
   def up_vote
@@ -23,10 +23,11 @@ class VotesController < ApplicationController
  
 
   private
-
-  def set_post
+  def set_limit_vote
     @post = Post.find(params[:post_id])
+    @vote = @post.votes.where(user_id: current_user.id).first
   end
+
 
 
 end 
