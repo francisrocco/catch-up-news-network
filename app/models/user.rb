@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_many :followships, foreign_key: 'follower_id'
-  # has_many :followers, through: :followships, foreign_key: 'follower_id'
-  # has_many :followings, through: :followships, foreign_key: 'following_id'
+
+  # has_many :followers, through: :followerships, class_name: 'User'
+  # has_many :followings, through: :watchers, foreign_key: 'following_id'
+
 	has_many :votes, dependent: :destroy
 	has_many :posts
     has_many :comments
@@ -20,12 +22,15 @@ class User < ApplicationRecord
   # think of 'following' as 'followee' and it makes sense to Tamtam
 
 	def followers
-		self.class.joins(:followships).where(followships: {following_id: self.id})
+		# self.class.joins(:followships).where(followships: {following_id: self.id})
+		Followship.where(following_id: u.id).pluck(:follower_id)
+		
 	end
 
 	# return everyone that a user is following
 	def following
-		self.class.joins(:followships).where(followships: {follower_id: self.id})
+		# self.class.joins(:followships).where(followships: {follower_id: self.id})
+		Followship.where(follower_id: u.id).pluck(:following_id)
 	end
 
 	# self.following?(user) => is self following user?
