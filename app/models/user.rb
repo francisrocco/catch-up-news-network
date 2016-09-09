@@ -30,12 +30,20 @@ class User < ApplicationRecord
 
 	# self.following?(user) => is self following user?
 	def following?(user)
-		return true ? following : false
+		if self.following.where(name: user.name).size < 0
+			return true
+		else
+			return false
+		end
 	end
 
 	# self.followed_by?(user) => is self followed by user?
 	def followed_by?(user)
-		return true ? followers : false
+		if self.followers.where(name: user.name).size < 0
+			return true
+		else
+			return false
+		end
 	end
 
 	def has_followers?
