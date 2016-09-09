@@ -1,1 +1,7 @@
-<h1>These are all of the posts related to <%= @tag.name %> .. good luck!</h1>
+<h1>These are all of the posts related to <%= @tag.name %> .. have fun!</h1>
+
+<% @posts.each do |post| %>
+  <%= render :partial => 'posts/thumbnail', locals: {post: post} %>
+<% end %>
+
+<%= will_paginate @posts %>

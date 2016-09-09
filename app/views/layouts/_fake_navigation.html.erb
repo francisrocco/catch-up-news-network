@@ -19,6 +19,11 @@
                <span class= 'caret' > </span>
             <% end %>
           <ul class='dropdown-menu'>
+            <li>
+              <%= link_to dashboard_path do %>
+                view your dashboard
+              <% end %>
+            </li>
             <li> 
               <%= link_to edit_user_path(current_user) do %>
                   edit profile
