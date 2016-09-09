@@ -51,19 +51,3 @@ a {
 }
 </style>
 
-<div class='thumbnail'>
-  <a target="_blank" href="<%= post.link %>">
-  <div class='image'>
-    <img src="<%= post.image %>" width="450">
-      <div class='headline'>
-          <div class='short' color='black'><h3><%= post.post_title %></h3></div>
-      </div>
-    </div>
-    <div class='caption'>
-      <%= post.description %><br>
-      <% post.tags.each do |tag| %>
-        <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
-      <% end %>
-    </div>
-  </a>
-</div>
