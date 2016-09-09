@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :tags
   has_many :comments
+  accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
   has_many :votes, dependent: :destroy
   
   def thumbnail
