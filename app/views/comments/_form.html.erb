@@ -1,6 +1,8 @@
 <%= form_for post.comments.build do |f| %>
-<%= f.label "Make a comment" %>
-<%= f.hidden_field :post_id, value: post.id %>
-<%= f.text_area :message %>
-<%= f.submit %>
+	<%= f.label "Leave comment:" %>
+	<%= f.hidden_field :post_id, value: post.id %>
+	<br>
+	<%= f.text_area :message %>
+	<br>
+	<%= f.submit %>
 <% end %>
