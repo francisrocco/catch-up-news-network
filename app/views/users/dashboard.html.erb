@@ -1,9 +1,8 @@
 <h1>Welcome, <%= current_user.name %>!</h1>
 
-<ul>
-<!-- if current user has followers -->
 <% if current_user.has_followers? %>
-	<h2>Your Followers</h2>
+<h2>Your Followers</h2>
+<ul>
 	<% current_user.followers.each do |follower| %>
 		<li><%= link_to follower.name, user_path(follower) %></li>
 	<% end %>
@@ -46,3 +45,8 @@
 <h2>Make a Post</h2>
 <%= render partial: 'posts/form', locals: {post: Post.new} %>
 <% end %>
+
+<h2>Edit Your Profile</h2>
+<%= render partial: 'form', locals: {user: current_user} %>
+
+

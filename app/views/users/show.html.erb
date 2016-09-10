@@ -22,25 +22,56 @@
 		<% end %>
 <% end %>
 
-<% if @user.has_followers? %>
-	<h2><%= @user.followers.count %> people are following <%= @user.name %></h2>
+<% if @user.has_friends? %>
+	<h2><%= @user.name %>'s Friends</h2>
 	<ul>
-	<% @user.followers.each do |follower| %>
-		<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
+	<% @user.friends.each do |friend| %>
+		<li><strong><%= link_to friend.name, user_path(friend) %></strong></li>
 	<% end %>
 	</ul>
+<% end %>
+
+
+<% if @user.has_followers? %>
+
+	<% if @user.followers_count < 1 %>
+		<h2><%= @user.followers.count %> people are following <%= @user.name %>:</h2>
+		<ul>
+		<% @user.followers.each do |follower| %>
+			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
+		<% end %>
+		</ul>
 	<% else %>
+		<h2>One person is following <%= @user.name %>:</h2>
+		<% @user.followers.each do |follower| %>
+			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
+		<% end %>
+		</ul>
+	<% end %>
+
+<% else %>
 		<h3><%= @user.name %> has no followers. 😞</h3>
 <% end %>
 <br>
 <% if @user.has_following? %>
-	<h2><%= @user.name %> is following <%= @user.following.size %> people:</h2>
-	<ul>
-	<% @user.following.each do |followed| %>
-		<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
-	<% end %>
-	</ul>
-	<% else %>
+
+	<% if @user.following_count > 1 %>
+		<h2><%= @user.name %> is following <%= @user.following.size %> people:</h2>
+		<ul>
+		<% @user.following.each do |followed| %>
+			<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
+		<% end %>
+		</ul>
+		<% else %>
+			<h2><%= @user.name %> is following one person:</h2>
+			<ul>
+			<% @user.following.each do |followed| %>
+				<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
+			<% end %>
+			</ul>	
+		<% end %>
+
+<% else %>
 		<h3><%= @user.name %> isn't following anyone. 😞</h3>
 <% end %>
 
