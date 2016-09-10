@@ -70,7 +70,7 @@ class Post < ApplicationRecord
 
   def self.get_user_posts_by_following(user)
     following_ids = user.following.map(&:id)
-    Post.where(user_id: user.id).order('created_at DESC')
+    Post.where(user_id: following_ids).order('created_at DESC')
   end
 
   # post.get_poster_name #=> jabba_the_hutt_b0i__460
@@ -84,10 +84,10 @@ class Post < ApplicationRecord
   end
 
   def get_post_date
-    if new_post?
+    if is_new_post?
       " just posted!"
     else
-      post.created_at.strftime(' posted on %a, %D, at %l:%M %P')
+      self.created_at.strftime(' posted on %a, %D, at %l:%M %P')
     end
   end
 

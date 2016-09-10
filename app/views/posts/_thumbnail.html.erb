@@ -86,6 +86,10 @@ a {
     <% post.tags.each do |tag| %>
       <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
     <% end %>
+    &nbsp
+    <span>
+    <%= link_to post.get_poster_name, user_path(post.user) %><%= post.get_post_date %>
+    </span>
   </div>
 
   </a>
