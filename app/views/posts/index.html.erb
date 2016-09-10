@@ -2,8 +2,8 @@
 
 
 <% @posts.each do |post| %>
-
-  <%= render partial: 'thumbnail', locals: {post: post} %>
+<%= post.title %>
+<%= post.link %>
 <% end %>
 
 <%= will_paginate @posts %>

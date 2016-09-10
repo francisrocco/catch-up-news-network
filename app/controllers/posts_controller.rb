@@ -16,12 +16,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @creator = current_user
     if @post.save
       redirect_to user_path(current_user)
     else
       render :new
     end
   end
+  
 
   def edit
   end
