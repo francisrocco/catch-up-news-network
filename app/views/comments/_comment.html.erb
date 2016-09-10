@@ -2,7 +2,9 @@
 	<h3>Comments</h3>
 	<ul id="Comments">
 	<% post.comments.each do |comment| %>
-		<li><strong><%= comment.post.user.name %> wrote: </strong><%= comment.message %></li>
+		<li>
+			<%= comment.parse_comment %>
+		</li>
 	<% end %>
 	</ul>
 <% else %>
