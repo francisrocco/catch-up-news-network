@@ -20,6 +20,16 @@
 		<% end %>
 <% end %>
 
+<% if @user.has_friends? %>
+	<h2><%= @user.name %>'s Friends</h2>
+	<ul>
+	<% @user.friends.each do |friend| %>
+		<li><strong><%= link_to friend.name, user_path(friend) %></strong></li>
+	<% end %>
+	</ul>
+<% end %>
+
+
 <% if @user.has_followers? %>
 
 	<% if @user.followers_count < 1 %>
@@ -36,7 +46,7 @@
 		<% end %>
 		</ul>
 	<% end %>
-	
+
 <% else %>
 		<h3><%= @user.name %> has no followers. 😞</h3>
 <% end %>

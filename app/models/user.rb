@@ -27,6 +27,7 @@ class User < ApplicationRecord
   end
 
 	# return everyone that self is following
+	# later, we need another method that returns followings and followers who are NOT friends with self	
   def following
     self.class.joins(:followingships).where(followships: {follower_id: self.id})
   end
@@ -104,6 +105,5 @@ class User < ApplicationRecord
 			return false
 		end
 	end
-
 
 end
