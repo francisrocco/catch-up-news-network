@@ -82,8 +82,11 @@ class User < ApplicationRecord
 	end
 
 	def friends
+		# this works! but can someone refactor it using AR assocations so that
+		# it returns an AR_Relation instead of an Array?
 		if self.has_friends?
-			self.followers.select{|follower| self.following.where(name: follower)}
+			user_following = self.following.collect {|f| f.name}
+			self.followers.select {|follower| user_following.include?(follower.name)}
 		else
 			return nil
 		end
@@ -91,13 +94,14 @@ class User < ApplicationRecord
 
 	def friends_with?(user)
 		if has_friends?
-
 			if self.following?(user) && self.followed_by?(user)
 				return true 
 			else
 				return false
 			end
-
+		else
+			# we need this because it otherwise returns 'nil' and 'nil' isn't falsey enough!
+			return false
 		end
 	end
 
