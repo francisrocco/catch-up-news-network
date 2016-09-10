@@ -9,8 +9,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    user = User.find_by(email: login_params[:email])
+    binding.pry
+    if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       redirect_to '/'
     else
@@ -23,5 +24,9 @@ class SessionsController < ApplicationController
     redirect_to '/'
   end
 
+  private
+    def login_params
+      params.require(:user).permit(:email, :password)
+    end
 
 end

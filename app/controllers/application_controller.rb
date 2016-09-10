@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
       render '/index'
     else
     	flash[:notice] = "You have to be logged in to view new posts!"
-      render '/index'
     end
 	end
 
