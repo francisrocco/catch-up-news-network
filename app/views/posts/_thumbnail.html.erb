@@ -59,7 +59,6 @@ a {
 }
 
 </style>
-
 <div class='thumbnail'>
   <a target="_blank" href="<%= post.link %>">
   <div class='image'>
@@ -71,15 +70,17 @@ a {
   <div class="caption">
     <%= post.description %><br>
   </div>
-  <div class='vote-arrows pull-left bottom-portion'>
+<div class='vote-arrows pull-left bottom-portion'>
     <span id= "voteUp">
-      <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post %>
+      <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post, remote: true %>
     </span>
     &nbsp
+    <span id='post_<%=post.id%>_votes'>
     <strong><%= post.total_votes %></strong>
+    </span>
     &nbsp
     <span id= "myToolTip" >
-      <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post  %>
+      <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post, remote: true   %>
     </span>
     &nbsp
     <% post.tags.each do |tag| %>
@@ -88,4 +89,4 @@ a {
   </div>
 
   </a>
-</div>
+</div> 

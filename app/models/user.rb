@@ -1,29 +1,34 @@
 class User < ApplicationRecord
-  # has_many :followships
+  has_many :followships
+  has_many :votes, dependent: :destroy
+  has_many :posts
+  has_many :comments
+  has_secure_password
+
   def followers
     Followship.where(following_id: self.id)
   end
 
-  def following
-    Followship.where(follower_id: self.id)
-  end
-  # has_many :followships
-  has_many :followers, class_name: 'Followships'
-  has_many :following, class_name: 'Followships'
-	has_many :votes, dependent: :destroy
-	has_many :posts
-    has_many :comments
-	has_secure_password
+ #  def following
+ #    Followship.where(follower_id: self.id)
+ #  end
+ #  # has_many :followships
+ #  has_many :followers, class_name: 'Followships'
+ #  has_many :following, class_name: 'Followships'
+	# has_many :votes, dependent: :destroy
+	# has_many :posts
+ #    has_many :comments
+	# has_secure_password
 
-	# current user follows a new user: current_user.follow(user) => current user is now following user
-  def follow(user)
-    new_relationship = Followship.new(following_id: user.id, follower_id: self.id)
-    if new_relationship.save
-      return true
-    else
-      return false
-    end
-  end
+	# # current user follows a new user: current_user.follow(user) => current user is now following user
+ #  def follow(user)
+ #    new_relationship = Followship.new(following_id: user.id, follower_id: self.id)
+ #    if new_relationship.save
+ #      return true
+ #    else
+ #      return false
+ #    end
+ #  end
 
   # think of 'following' as 'followee' and it makes sense to Tamtam
 
