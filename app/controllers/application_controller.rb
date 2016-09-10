@@ -4,10 +4,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :authorize_user, :logged_in?
 
 	def home
-    if current_user
+    if logged_in?
       render '/index'
     else
-      render '/sessions/new'
+    	flash[:notice] = "You have to be logged in to view new posts!"
+      render '/index'
     end
 	end
 
@@ -21,9 +22,8 @@ class ApplicationController < ActionController::Base
 
 	def authorize_user
 	  if !logged_in?
-	   redirect_to root_path
+	   redirect_to login_path
 	  end
 	end
-
 
 end

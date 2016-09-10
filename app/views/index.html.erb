@@ -1,1 +1,9 @@
 Oops! Um, Newsfest!!
+
+<div id="notice">
+<% if flash[:notice] %>
+	<%= flash[:notice] %>
+	<% flash[:notice] = "" %>
+	<%= render partial: 'sessions/form', locals: {user: User.new} %>
+<% end %>
+</div>
