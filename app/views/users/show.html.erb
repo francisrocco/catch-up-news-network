@@ -89,5 +89,7 @@
 		<%= render partial: 'comments/form', locals: {post: post} %>
 
 	<% end %>
+	<% else %>
+		<h2>This user has no posts.</h2>
 
 <% end %>

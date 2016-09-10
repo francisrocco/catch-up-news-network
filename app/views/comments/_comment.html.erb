@@ -1,12 +1,24 @@
+<style>
+
+	.comment {
+		background: #fff;
+	}
+
+</style>
+
 <% if post.comments.size > 0 %>
 	<h3>Comments</h3>
-	<ul id="Comments">
-	<% post.comments.each do |comment| %>
-		<li>
-			<%= comment.parse_comment %>
-		</li>
+	<% post.comments.reverse_each do |comment| %>
+		<p>
+		<span class="comment">
+		<strong>
+			<%= link_to comment.author, user_path(comment.author) %>
+			<%= comment.datetime + ': ' %>
+		</strong>
+		<%= comment.message %>
+		</span>
+		</p>
 	<% end %>
-	</ul>
 <% else %>
 	<h3>No comments yet. Start a conversation!</h3>
 <% end %>
