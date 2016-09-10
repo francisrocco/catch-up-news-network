@@ -78,7 +78,15 @@ class User < ApplicationRecord
 	end
 
 	def has_friends?
-		self.followers.any?{|follower| self.following.where(name: follower)}
+		self.has_following? && self.has_followers?
+	end
+
+	def friends
+		if self.has_friends?
+			self.followers.select{|follower| self.following.where(name: follower)}
+		else
+			return nil
+		end
 	end
 
 	def friends_with?(user)
@@ -93,8 +101,5 @@ class User < ApplicationRecord
 		end
 	end
 
-	def friends
-		friends if has_friends?
-	end
 
 end
