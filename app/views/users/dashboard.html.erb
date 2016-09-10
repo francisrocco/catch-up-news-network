@@ -1,8 +1,8 @@
 <h1>Welcome, <%= current_user.name %>!</h1>
 
-<ul>
 <% if current_user.has_followers? %>
-	<h2>Your Followers</h2>
+<h2>Your Followers</h2>
+<ul>
 	<% current_user.followers.each do |follower| %>
 		<li><%= link_to follower.name, user_path(follower) %></li>
 	<% end %>
