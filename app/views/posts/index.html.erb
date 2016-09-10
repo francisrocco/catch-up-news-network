@@ -2,9 +2,12 @@
 
 
 
-<% @posts.each do |post| %>
-<%= post.title %>
-<%= post.link %>
-<% end %>
+<% @posts_by_user.each do |post| %>
+    <%= post.user_id %>
+    <br>
 
-<%= will_paginate @posts %>
+  <% end %>
+
+
+
+<%#= will_paginate @posts_by_user %>

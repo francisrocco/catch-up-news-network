@@ -114,8 +114,20 @@ class User < ApplicationRecord
     Post.joins(:user).where(users: {id: self.id})
   end
 
-  def get_current_user_posts
-  
+  # returns an array of AR Associations
+  def get_current_user_posts_by_following
+		current_user.following.collect do |followed|
+			followed.get_user_posts
+		end
+  end
+
+  private
+
+  	# only admin need this method
+	  def get_user_posts_by_following
+		self.following.collect do |followed|
+			followed.get_user_posts
+		end
   end
 
 end

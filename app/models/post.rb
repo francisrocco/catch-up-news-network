@@ -61,5 +61,28 @@ class Post < ApplicationRecord
     Post.joins(:votes).group('posts.id').order('SUM(votes.value) DESC')
   end
 
+  # GETTING USER POSTS (see sister methods in User Model)
+  # =======================================================
+
+  def self.get_user_posts(user)
+    self.joins(:user).where(users: {id: user.id})
+  end
+
+  # returns an array of AR Associations
+  def self.get_user_posts_by_following(user)
+    user.following.collect do |followed|
+      get_user_posts(followed)
+    end
+  end
+
+  private
+
+    # only admin need this method
+    def get_user_posts_by_following
+    self.following.collect do |followed|
+      followed.get_user_posts
+    end
+  end
+
 
 end

@@ -1,0 +1,11 @@
+<%= form_for user, url: '/login', method: 'post' do |f| %>
+<div class='control-group'>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+</div>
+<div class='control-group'>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+</div>
+  <%= f.submit class: 'btn-btn-primary'%>
+<% end %>
