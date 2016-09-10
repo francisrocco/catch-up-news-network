@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(@comment.post)
     else
-      redirect_to root_path
+      flash[:notice] = "You can't post that!"
     end
   end
 

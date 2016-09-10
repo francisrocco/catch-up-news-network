@@ -16,7 +16,7 @@ class Comment < ApplicationRecord
   end
 
   def author
-  	self.post.user.name
+  	self.user.name
   end
 
   # not using this, but maybe it'll become useful?
