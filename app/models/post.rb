@@ -61,7 +61,7 @@ class Post < ApplicationRecord
     Post.joins(:votes).group('posts.id').order('SUM(votes.value) DESC')
   end
 
-  # GETTING USER POSTS (see sister methods in User Model)
+  # GETTING USER POSTS (some sister methods in User Model)
   # =======================================================
 
   def self.get_user_posts(user)
@@ -73,6 +73,11 @@ class Post < ApplicationRecord
     user.following.collect do |followed|
       get_user_posts(followed)
     end
+  end
+
+  # post.get_poster_name #=> jabba_the_hutt_b0i__460
+  def get_poster_name
+    User.joins(:posts).where(posts: {id: self.id}).pluck(:name).take(1).join
   end
 
   private

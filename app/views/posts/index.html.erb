@@ -3,7 +3,7 @@
 
 
 <% @posts_by_user.each do |post| %>
-    <%= post.user_id %>
+    <%= post.pluck(:name).take(1).join %>'s Posts
     <br>
 
   <% end %>
