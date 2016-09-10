@@ -7,7 +7,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+    # binding.pry
+    @posts = current_user.posts.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
   def show

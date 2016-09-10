@@ -43,6 +43,7 @@
 		</ul>
 	<% else %>
 		<h2>One person is following <%= @user.name %>:</h2>
+		<ul>
 		<% @user.followers.each do |follower| %>
 			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
 		<% end %>
