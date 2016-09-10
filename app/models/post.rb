@@ -69,10 +69,6 @@ class Post < ApplicationRecord
   end
 
   def self.get_user_posts_by_following(user)
-    # returns an array of AR Associations
-    # user.following.collect do |followed|
-    #   get_user_posts(followed)
-    # end.flatten
     following_ids = user.following.map(&:id)
     Post.where(user_id: user.id).order('created_at DESC')
   end
@@ -80,6 +76,19 @@ class Post < ApplicationRecord
   # post.get_poster_name #=> jabba_the_hutt_b0i__460
   def get_poster_name
     User.joins(:posts).where(posts: {id: self.id}).pluck(:name).take(1).join
+  end
+
+  def is_new_post?
+    seconds = Time.now - self.created_at
+    seconds < 300 ? true : false
+  end
+
+  def get_post_date
+    if new_post?
+      " just posted!"
+    else
+      post.created_at.strftime(' posted on %a, %D, at %l:%M %P')
+    end
   end
 
   private
