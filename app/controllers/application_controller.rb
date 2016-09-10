@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
 	def authorize_user
 	  if !logged_in?
-	   redirect_to '/index'
+	   redirect_to root_path
 	  end
 	end
 
