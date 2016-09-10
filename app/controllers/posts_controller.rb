@@ -7,9 +7,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    # not sure yet how to implement
     # @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
-    @posts_by_user = Post.get_user_posts_by_following(current_user)
+    @posts_by_user = Post.get_user_posts_by_following(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
   def show

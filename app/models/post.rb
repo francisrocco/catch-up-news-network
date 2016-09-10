@@ -68,11 +68,13 @@ class Post < ApplicationRecord
     self.joins(:user).where(users: {id: user.id})
   end
 
-  # returns an array of AR Associations
   def self.get_user_posts_by_following(user)
-    user.following.collect do |followed|
-      get_user_posts(followed)
-    end
+    # returns an array of AR Associations
+    # user.following.collect do |followed|
+    #   get_user_posts(followed)
+    # end.flatten
+    following_ids = user.following.map(&:id)
+    Post.where(user_id: user.id).order('created_at DESC')
   end
 
   # post.get_poster_name #=> jabba_the_hutt_b0i__460

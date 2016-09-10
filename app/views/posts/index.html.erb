@@ -3,11 +3,14 @@
 
 
 <% @posts_by_user.each do |post| %>
-    <%= post.pluck(:name).take(1).join %>'s Posts
-    <br>
+  <%#= render partial: 'thumbnail', locals: {post: post} %>
+  <%= post.title %>
+  <br>
+  <%= link_to post.get_poster_name, user_path(post.user) %> posted at <%= post.created_at %>
+  <br>
 
   <% end %>
 
 
 
-<%#= will_paginate @posts_by_user %>
+<%= will_paginate @posts_by_user %>
