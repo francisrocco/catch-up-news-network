@@ -45,3 +45,8 @@
 <h2>Make a Post</h2>
 <%= render partial: 'posts/form', locals: {post: Post.new} %>
 <% end %>
+
+<h2>Edit Your Profile</h2>
+<%= render partial: 'form', locals: {user: current_user} %>
+
+
