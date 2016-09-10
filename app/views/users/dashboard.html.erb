@@ -1,7 +1,6 @@
 <h1>Welcome, <%= current_user.name %>!</h1>
 
 <ul>
-<!-- if current user has followers -->
 <% if current_user.has_followers? %>
 	<h2>Your Followers</h2>
 	<% current_user.followers.each do |follower| %>

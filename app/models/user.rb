@@ -41,12 +41,12 @@ class User < ApplicationRecord
 
 	# is anyone following self?
 	def has_followers?
-	 self.followers.size > 0
+	 self.followers_count > 0
 	end
 
 	# is self following anyone?
 	def has_following?
-	 self.following.size > 0
+	 self.following_count > 0
 	end
 
 	# self.following?(user) => is self following user?
@@ -77,12 +77,24 @@ class User < ApplicationRecord
 		end
 	end
 
-	def friends?(user)
-		if self.following?(user) && self.followed_by?(user)
-			return true 
-		else
-			return false
+	def has_friends?
+		self.followers.any?{|follower| self.following.where(name: follower)}
+	end
+
+	def friends_with?(user)
+		if has_friends?
+
+			if self.following?(user) && self.followed_by?(user)
+				return true 
+			else
+				return false
+			end
+
 		end
+	end
+
+	def friends
+		friends if has_friends?
 	end
 
 end
