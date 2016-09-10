@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :authorize_user, :logged_in?
 
 	def home
+		render 'sessions/new'
 	end
 
 	def current_user
