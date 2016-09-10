@@ -85,9 +85,9 @@ class Post < ApplicationRecord
 
   def get_post_date
     if is_new_post?
-      " just posted!"
+      "just now!"
     else
-      self.created_at.strftime(' posted on %a, %D, at %l:%M %P')
+      self.created_at.strftime('on %a, %D, at %l:%M %P')
     end
   end
 

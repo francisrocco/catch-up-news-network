@@ -1,4 +1,4 @@
-<h1>Latest News From Your Network</h1>
+<h1 align="center">Latest News From Your Network</h1>
 
 
 
@@ -6,7 +6,8 @@
   <%= render partial: 'thumbnail', locals: {post: post} %>
   <%#= post.title %>
   <br>
-  <%#= link_to post.get_poster_name, user_path(post.user) %><%= post.get_post_date %>
+  <%#= link_to post.get_poster_name, user_path(post.user) %>
+  <%#= link_to " posted " + post.get_post_date, post_path(post) %>
   <br>
 
   <% end %>
