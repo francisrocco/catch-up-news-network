@@ -85,16 +85,7 @@
 	<% @user.posts.each do |post| %>
 		<%= render partial: 'posts/thumbnail', locals: {post: post} %>
 		<!-- <li><div# link_to post.title, post.link, target: "_blank" %> -->
-		<% if post.comments.size < 0 %>
-			<h3>Comments</h3>
-			<ul id="Comments">
-			<% post.comments.each do |comment| %>
-				<li><%= comment.message %></li>
-			<% end %>
-			</ul>
-		<% else %>
-			<strong>No comments yet. Start a conversation!</strong>
-		<% end %>
+		<%= render partial: 'comments/comment', locals: {post: post} %>
 		<%= render partial: 'comments/form', locals: {post: post} %>
 
 	<% end %>
