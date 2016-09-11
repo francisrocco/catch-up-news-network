@@ -11,21 +11,19 @@ class Post < ApplicationRecord
 
   def post_title
     return self.title unless title = thumbnail.title
-    if title.length < 35
+    if title.length < 60
       return title
     else
-      return title[0..33] + "..."
+      return title[0..57] + "..."
     end
   end
 
   def description
     desc = thumbnail.description
-    #i don't think this is super necessary anymore
-    # desc = self.title if !thumbnail.images.first.src.include?("jpg")
-    if desc.length < 120
+    if desc.length < 110
       return desc
     else
-      return desc[0..117] + "..."
+      return desc[0..107] + "..."
     end
   end
 
@@ -34,11 +32,9 @@ class Post < ApplicationRecord
   end
 
   def image
-
     thumbnail = LinkThumbnailer.generate(self.link)
     img = thumbnail.images.first.src.to_s
   end
-
 
   #Methods for Votes function
 
