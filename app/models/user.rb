@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
 	has_many :votes, dependent: :destroy
 	has_many :posts
   has_many :comments
@@ -7,6 +6,22 @@ class User < ApplicationRecord
 
 	has_many :followerships, foreign_key: 'follower_id', class_name: 'Followship'
 	has_many :followingships, foreign_key: 'following_id', class_name: 'Followship'
+
+	# Validations
+	# ============
+	validates :name, uniqueness: true, presence: true, length: { minimum: 3, maximum: 25 }
+	validates :email, {
+		uniqueness: true,
+		presence: true,
+		format: {
+			with:
+			/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
+			on: :create
+		}
+	}
+
+	# Methods
+	# =========
 
 	# self follows a new user
   def follow(user)

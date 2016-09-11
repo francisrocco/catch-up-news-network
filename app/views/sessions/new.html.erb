@@ -1,3 +1,7 @@
+<% if flash[:notice] %>
+		<%= render partial: 'registrations/error', locals: {flash_error: flash[:error]} %>
+<% end %>
+
 <div class='well'>
   <h1>Welcome to Catch Up!</h1>
   <p>Log-in and catch up on the news and your friends</p>
