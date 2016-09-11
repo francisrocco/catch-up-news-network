@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to posts_path
     else
+      flash[:notice] = "You should have picked an easier password!"
       render :new
     end
   end

@@ -4,7 +4,10 @@
 
 	<% flash_notice ||= false %>
 	<% if flash_notice %>
-		<p><%= flash_notice %></p>
+		<p>
+		<span class="glyphicon glyphicon-remove"></span>
+		<%= flash_notice %>
+		</p>
 	<% end %>
 
 	<% user ||= false %>
