@@ -1,5 +1,7 @@
 class FollowshipsController < ApplicationController
 
+  before_action :authorize_user, only: [:follow]
+
   def follow
     user = User.find(params[:id])
     # Later we can just get rid of follow links for users you're already following
