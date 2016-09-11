@@ -75,7 +75,7 @@ a {
       </div>
   </div>
 
-  <div class='vote-arrows pull-left bottom-portion'>
+   <div class='vote-arrows pull-left bottom-portion'>
     <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %> 
       <span class= "glyphicon glyphicon-thumbs-up"> </span>
     <% end %>
