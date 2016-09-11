@@ -2,6 +2,7 @@
 
 <% @posts_by_user.each do |post| %>
   <%= render partial: 'thumbnail', locals: {post: post} %>
+  <%= link_to "Edit", edit_post_path(post) %>
   <%#= post.title %>
   <br>
   <%#= link_to post.get_poster_name, user_path(post.user) %>

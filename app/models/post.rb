@@ -34,13 +34,9 @@ class Post < ApplicationRecord
   end
 
   def image
+
     thumbnail = LinkThumbnailer.generate(self.link)
     img = thumbnail.images.first.src.to_s
-    if !img.include?("jpg")
-      return "http://img00.deviantart.net/4854/i/2013/352/8/1/newspaper_collage_texture_by_flordeneu-d6yeuvs.jpg"
-    else
-      return img
-    end
   end
 
 
