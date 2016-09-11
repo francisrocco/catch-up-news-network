@@ -8,8 +8,8 @@
     width: 454px;
     /*height: 330px;*/   
     height: 30em; /* using ems because they scale acc. to font size */
-    overflow: auto;
-    background: lightgray;
+/*    overflow: auto;
+*/    background: lightgray;
     border: 1px solid black;
     padding: 1px;
 }
@@ -48,6 +48,7 @@ a {
   padding: 5px 10px;
   width: 450px;
   max-height:95px;
+  overflow: visible;
 }
 
 .caption {
@@ -87,23 +88,24 @@ a {
   <div class="caption">
     <%= post.description %><br>
   </div>
-<div class='vote-arrows pull-left bottom-portion'>
-    <span id= "voteUp">
-      <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post, remote: true %>
-    </span>
-    &nbsp
+ <div class='vote-arrows pull-left bottom-portion'>
+    <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %> 
+      <span class= "glyphicon glyphicon-thumbs-up"> </span>
+    <% end %>
+      &nbsp
     <span id='post_<%=post.id%>_votes'>
-    <strong><%= post.total_votes %></strong>
+      <strong><%= post.total_votes %></strong>
     </span>
-    &nbsp
-    <span id= "myToolTip" >
-      <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post, remote: true   %>
-    </span>
-    &nbsp
+      &nbsp
+   <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %> 
+      <span class= "glyphicon glyphicon-thumbs-down"> </span>
+    <% end %>
+      &nbsp
+
     <% post.tags.each do |tag| %>
       <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
     <% end %>
   </div>
-
   </a>
+
 </div> 

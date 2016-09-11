@@ -1,21 +1,27 @@
 class VotesController < ApplicationController
   before_action :set_limit_vote
 
+  def vote
+    @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    respond_to do |format| 
+      format.html {redirect_to :back, notice: "You voted!"}
+      format.js
+    end
+  end
+
 
   def up_vote
     if @vote
       @vote.update_attribute(:value, 1)
       flash[:notice] = "Successfully upvoted."
         respond_to do |format| 
-        format.html {redirect_to :back}
-        format.js
-    end
+          format.js 
+        end
     else
       @vote = current_user.votes.create(value: 1, post: @post)
         flash[:notice] = "Successfully upvoted."
         respond_to do |format| 
-        format.html {redirect_to :back}
-        format.js
+          format.js
       end
     end
     redirect_to :back
@@ -28,7 +34,6 @@ class VotesController < ApplicationController
               flash[:notice] = "Successfully downvoted."
 
       respond_to do |format| 
-        format.html {redirect_to :back, notice: "You voted!"}
         format.js
       end
     else
@@ -36,7 +41,6 @@ class VotesController < ApplicationController
                     flash[:notice] = "Successfully downvoted."
 
       respond_to do |format| 
-        format.html {redirect_to :back, notice: "You voted!"}
         format.js
       end
     end
