@@ -72,3 +72,37 @@ footer a, footer a:hover {
   float: left;
 }*/
 
+.errors {
+  position: relative;
+  display: inline-block;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  min-height: 50px;
+  height: auto;
+  overflow: auto;
+}
+
+.emoji {
+  padding-top: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+  float: right;
+  text-align: center;
+  font-size: 60px;
+  color: #000;
+}
+
+.errors h2 {
+  text-align: center;
+  color: #aa0000;
+  font-weight: bold;
+}
+
+.errors p {
+  color: #cc0000;
+}
+
+.errors span {
+  color: #000;
+}
