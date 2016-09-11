@@ -1,13 +1,21 @@
 .errors {
 	position: relative;
 	display: inline-block;
-	border: 1px dotted #000;
+	/*border: 3px solid #000;*/
 	padding-right: 10px;
 	padding-left: 10px;
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 	margin-bottom: 10px;
-	height: 14em;
+	height: 17em;
 	overflow: auto;
+}
+
+.emoji {
+	padding: 20px;
+	float: right;
+	text-align: center;
+	font-size: 60px;
+	color: #000;
 }
 
 .errors h2 {

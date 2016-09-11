@@ -1,15 +1,17 @@
 <% if @user.errors.any? %>
-<div class="no">
-	<div class="errors">
-		<h2>Woah there, bud!</h2>
-		<% @user.errors.full_messages.each do |msg| %>
-			<p>
-			<span class="glyphicon glyphicon-remove"></span>
-			<%= msg + '!' %>
-			</p>
-		<% end %>
-	</div>
+<div class="errors">
+	<h2>Woah there, bud!</h2>
+	<span class="emoji">😲</span>
+	<% @user.errors.full_messages.each do |msg| %>
+		<p>
+		<span class="glyphicon glyphicon-remove"></span>
+		<%= msg + '!' %>
+		</p>
+	<% end %>
 </div>
 <% end %>
 
 <%= render partial: 'registrations/form', locals: {user: @user, url: signup_path} %>
+
+
+
