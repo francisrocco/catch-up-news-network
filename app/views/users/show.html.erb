@@ -1,8 +1,10 @@
 <h1><%= @user.name %></h1>
 
 <div id="notice">
-<% if flash[:notice] %>
-	<%= render partial: '/registrations/error', locals: {flash_notice: flash[:notice]} %>
+<% if flash[:error] %>
+	<%= render partial: '/registrations/error', locals: {flash_error: flash[:error]} %>
+<% elsif flash[:notice] %>
+	<strong><%= flash[:notice] %></strong>
 <% end %>
 </div>
 
