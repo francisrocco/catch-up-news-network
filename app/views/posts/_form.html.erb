@@ -1,12 +1,17 @@
-<%= form_for(post) do |f| %>
+<%= form_for post do |f| %>
+<div class="field">
   <%= f.text_area :title, placeholder: "Title" %><br>
+  </div>
+  <div class="field">
   <%= f.text_area :link, placeholder: "Link" %><br>
-    <div class="field">
-      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
-      <%= f.fields_for(:tags, Tag.new) do |tag_form| %>
-        <p>Add a new tag:</p>
-        <%= tag_form.label :name %>
-        <%= tag_form.text_field :name %>
+  </div>
+    <div class="field", autocomplete="off">
+    <% i = 1 %>
+      <%= f.fields_for(:tags, @post.tags) do |tag_form| %>
+        <p>Tag this photo:</p>
+        <%= tag_form.text_field :name, data: { autocomplete_source: Tag.order(:name).map(&:name)}, id: "tag-field-#{i}" %>
+        <% i += 1 %>
+
       <% end %>
     </div>
   <%= f.submit %>
