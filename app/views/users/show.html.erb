@@ -43,6 +43,7 @@
 		</ul>
 	<% else %>
 		<h2>One person is following <%= @user.name %>:</h2>
+		<ul>
 		<% @user.followers.each do |follower| %>
 			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
 		<% end %>
@@ -50,7 +51,7 @@
 	<% end %>
 
 <% else %>
-		<h3><%= @user.name %> has no followers. 😞</h3>
+		<h2><%= @user.name %> has no followers. 😞</h2>
 <% end %>
 <br>
 <% if @user.has_following? %>
@@ -72,27 +73,23 @@
 		<% end %>
 
 <% else %>
-		<h3><%= @user.name %> isn't following anyone. 😞</h3>
+		<h2><%= @user.name %> isn't following anyone. 😞</h2>
 <% end %>
 
 <br>
 
-<% if @user.posts %>
+<% if @user.posts.size > 0 %>
+
 	<h2><%= @user.name %>'s Posts</h2>
+
 	<% @user.posts.each do |post| %>
-		<li><div><%= link_to post.title, post.link, target: "_blank" %>
-		  <h3>Tags for this Post:</h3>
-  				<% post.tags.each do |tag| %>
-  		<li><%= tag.name %></li>
-  			<% end %>
-						<h3>Comments</h3>
-						<ul id="Comments">
-						<% post.comments.each do |comment| %>
-
-						<li><%= comment.message %></li>
-						<% end %></ul>
-
-		</div></li>
+		<%= render partial: 'posts/thumbnail', locals: {post: post} %>
+		<!-- <li><div# link_to post.title, post.link, target: "_blank" %> -->
+		<%= render partial: 'comments/comment', locals: {post: post} %>
 		<%= render partial: 'comments/form', locals: {post: post} %>
+
 	<% end %>
+	<% else %>
+		<h2>This user has no posts.</h2>
+
 <% end %>

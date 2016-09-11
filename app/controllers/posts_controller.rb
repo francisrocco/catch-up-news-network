@@ -1,13 +1,14 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show]
-  before_action :authorize_user, only: [:index]
+  before_action :set_post, only: [:show, :edit, :update]
+  before_action :authorize_user, only: [:index, :show]
 
   def new
     @post = Post.new
   end
 
   def index
-    @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+    # @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+    @posts_by_user = Post.get_user_posts_by_following(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
   def show

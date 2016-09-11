@@ -1,12 +1,12 @@
-<h1>All The Posts</h1>
+<h1>Latest News From Your Network</h1>
 
+<% @posts_by_user.each do |post| %>
+  <%= render partial: 'thumbnail', locals: {post: post} %>
+  <%#= post.title %>
+  <br>
+  <%#= link_to post.get_poster_name, user_path(post.user) %>
+  <%#= link_to " posted " + post.get_post_date, post_path(post) %>
+  <br>
+  <% end %>
 
-
-
-
-<% @posts.each do |post| %>
-<%= post.title %>
-<%= post.link %>
-<% end %>
-
-<%= will_paginate @posts %>
+<%= will_paginate @posts_by_user %>

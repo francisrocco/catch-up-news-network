@@ -1,13 +1,24 @@
 
 <style>
+
 .thumbnail{
     position: relative;
-    width: 450px;
-    height: 330px;
+    /* image 450px + 1px margin-R + 1px margin-R + 1px padding-R + 1px padding-L = 454px */
+    /* gets rid of icky side scrolling */
+    width: 454px;
+    /*height: 330px;*/   
+    height: 30em; /* using ems because they scale acc. to font size */
     overflow: auto;
     background: lightgray;
     border: 1px solid black;
-    padding: 0;
+    padding: 1px;
+}
+
+.poster {
+  /*position: absolute;*/
+  text-align: center;
+  padding: 2px;
+  margin: 0;
 }
 
 a {
@@ -60,6 +71,12 @@ a {
 
 </style>
 <div class='thumbnail'>
+  &nbsp
+  <div class="poster">
+  <%= link_to post.get_poster_name, user_path(post.user) %>
+  <%= link_to " posted " + post.get_post_date, post_path(post) %>
+  </div>
+  <br>
   <a target="_blank" href="<%= post.link %>">
   <div class='image'>
     <img src="<%= post.image %>" width="450">

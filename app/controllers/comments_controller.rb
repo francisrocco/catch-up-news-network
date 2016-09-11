@@ -1,15 +1,16 @@
 class CommentsController < ApplicationController
 
   def new
+    @comment = Comment.new
   end
 
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to user_path(@comment.post.user)
+      redirect_to post_path(@comment.post)
     else
-      redirect_to root_path
+      flash[:notice] = "You can't post that!"
     end
   end
 
