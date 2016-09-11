@@ -1,1 +1,8 @@
+<div>
+<% if @user.errors.any? %>
+	<% @user.errors.full_messages.each do |msg| %>
+		<%= msg %>
+	<% end %>
+<% end %>
+</div>
 <%= render partial: 'registrations/form', locals: {user: @user, url: signup_path} %>
