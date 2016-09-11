@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'faker'
 
+gem 'jquery-ui-rails'
 
 gem 'bcrypt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

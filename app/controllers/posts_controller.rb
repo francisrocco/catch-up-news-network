@@ -5,6 +5,9 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    3.times do
+      @post.tags.build
+    end
   end
 
   def index
