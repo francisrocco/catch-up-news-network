@@ -14,6 +14,7 @@
 	<% end %>
 
 	<% else %>
+		<%= link_to "Follow #{@user.name}!", follow_path(@user) %>
 		<% if @user.following?(current_user) %>
 			<p><%= @user.name %> is following you!</p>
 		<% end %>
