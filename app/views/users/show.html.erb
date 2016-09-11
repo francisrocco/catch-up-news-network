@@ -2,8 +2,7 @@
 
 <div id="notice">
 <% if flash[:notice] %>
-	<p><%= flash[:notice] %></p>
-	<% flash[:notice] = nil %>
+	<%= render partial: '/registrations/error', locals: {flash_notice: flash[:notice]} %>
 <% end %>
 </div>
 

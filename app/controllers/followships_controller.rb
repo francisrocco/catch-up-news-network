@@ -8,6 +8,9 @@ class FollowshipsController < ApplicationController
     if user.followed_by?(current_user)
       flash[:notice] = "You're already following this user!"
       redirect_to user_path(user)
+    elsif user = current_user
+      flash[:notice] = "You can't follow yourself, silly!"
+      redirect_to user_path(user)
     else
       current_user.follow(user)
       flash[:notice] = "You just followed #{user.name}!"
