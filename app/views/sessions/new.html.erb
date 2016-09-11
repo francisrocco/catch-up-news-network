@@ -1,3 +1,10 @@
+<% if flash[:notice] %>
+	<div class="errors">
+		<%= flash[:notice] %>
+		<% flash[:notice] = nil %>
+	</div>
+<% end %>
+
 <div class='well'>
   <h1>Welcome to Catch Up!</h1>
   <p>Log-in and catch up on the news and your friends</p>
