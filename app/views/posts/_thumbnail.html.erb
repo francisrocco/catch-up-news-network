@@ -1,13 +1,14 @@
 
 <style>
+
 .thumbnail{
-    position: relative;
-    width: 450px;
-    height: 330px;
-    overflow: auto;
-    background: lightgray;
-    border: 1px solid black;
-    padding: 0;
+  position: relative;
+  width: 450px;
+  height: 330px;
+  overflow: hidden;
+  background: lightgray;
+  border: 1px solid black;
+  padding: 0;
 }
 
 a {
@@ -23,12 +24,12 @@ a {
 }
 
 .headline{
-    position: absolute;
-    opacity: 0.55;
-    bottom:0;
-    background: white;
-    width: 100%;
-    padding: 10px;
+  position: absolute;
+  opacity: 0.55;
+  bottom:0;
+  background: white;
+  width: 100%;
+  padding: 10px;
 }
 
 .bottom-portion{
@@ -59,34 +60,37 @@ a {
 }
 
 </style>
+
 <div class='thumbnail'>
-  <a target="_blank" href="<%= post.link %>">
-  <div class='image'>
-    <img src="<%= post.image %>" width="450">
-      <div class='headline'>
-          <div class='short' color='black'><h3><%= post.post_title %></h3></div>
-    </div>
-  </div>
+  <a target="_blank" href="<%= post.link %>">  
+
   <div class="caption">
-    <%= post.description %><br>
+       <%= post.description %><br>
   </div>
-<div class='vote-arrows pull-left bottom-portion'>
-    <span id= "voteUp">
-      <%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-thumbs-up', method: :post, remote: true %>
-    </span>
-    &nbsp
+
+  <div class='image'>
+    "<img src="<%= post.image %>" width="450">
+      <div class='headline'>
+        <div class='short' color='black'><h3><%= post.post_title %></h3> </div>
+      </div>
+  </div>
+
+  <div class='vote-arrows pull-left bottom-portion'>
+    <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %> 
+      <span class= "glyphicon glyphicon-thumbs-up"> </span>
+    <% end %>
+      &nbsp
     <span id='post_<%=post.id%>_votes'>
-    <strong><%= post.total_votes %></strong>
+      <strong><%= post.total_votes %></strong>
     </span>
-    &nbsp
-    <span id= "myToolTip" >
-      <%= link_to " ", post_down_vote_path(post), class: "glyphicon glyphicon-thumbs-down", method: :post, remote: true   %>
-    </span>
-    &nbsp
+      &nbsp
+   <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %> 
+      <span class= "glyphicon glyphicon-thumbs-down"> </span>
+    <% end %>
+      &nbsp
+
     <% post.tags.each do |tag| %>
       <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
     <% end %>
   </div>
-
-  </a>
-</div> 
+</div>
