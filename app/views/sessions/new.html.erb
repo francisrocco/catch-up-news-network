@@ -1,9 +1,5 @@
 <% if flash[:notice] %>
-	<div class="errors">
-		<h2>Woah there, bud!</h2>
-		<%= flash[:notice] %>
-		<% flash[:notice] = nil %>
-	</div>
+		<%= render partial: 'registrations/error', locals: {flash_notice: flash[:notice]} %>
 <% end %>
 
 <div class='well'>

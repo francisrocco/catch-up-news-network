@@ -1,0 +1,20 @@
+<div class="errors">
+	<h2>Woah there, bud!</h2>
+	<span class="emoji">😲</span>
+
+	<% flash_notice ||= false %>
+	<% if flash_notice %>
+		<p><%= flash_notice %></p>
+	<% end %>
+
+	<% user ||= false %>
+	<% if user && user.errors.any? %>
+		<% user.errors.full_messages.each do |msg| %>
+			<p>
+			<span class="glyphicon glyphicon-remove"></span>
+			<%= msg + '!' %>
+			</p>
+		<% end %>
+	<% end %>
+
+</div>

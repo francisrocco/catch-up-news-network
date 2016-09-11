@@ -72,7 +72,11 @@ footer a, footer a:hover {
   float: left;
 }*/
 
+
+/* error formatting
+======================*/
 .errors {
+  border: 1px black solid;
   position: relative;
   display: inline-block;
   padding-right: 10px;
