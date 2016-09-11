@@ -2,7 +2,9 @@
 
 <% @posts_by_user.each do |post| %>
   <%= render partial: 'thumbnail', locals: {post: post} %>
+  <% if post.user == current_user %>
   <%= link_to "Edit", edit_post_path(post) %>
+  <% end %>
   <%#= post.title %>
   <br>
   <%#= link_to post.get_poster_name, user_path(post.user) %>

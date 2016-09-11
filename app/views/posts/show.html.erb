@@ -1,4 +1,6 @@
 <%= render partial: 'thumbnail', locals: {post: @post} %>
+<% if @post.user == current_user %>
 <%= link_to "Edit", edit_post_path(@post) %>
+<% end %>
 <%= render partial: 'comments/comment', locals: {post: @post} %>
 <%= render partial: 'comments/form', locals: {post: @post} %>
