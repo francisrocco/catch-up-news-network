@@ -1,2 +1,3 @@
-
 <%= render partial: 'thumbnail', locals: {post: @post} %>
+<%= render partial: 'comments/comment', locals: {post: @post} %>
+<%= render partial: 'comments/form', locals: {post: @post} %>

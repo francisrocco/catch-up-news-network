@@ -1,3 +1,5 @@
+
+
 <h1><%= @user.name %></h1>
 
 <div id="notice">
@@ -8,7 +10,6 @@
 </div>
 
 <% if current_user.following?(@user) %>
-
 	<% if current_user.followed_by?(@user) %>
 		<p>You're both friends!</p>
 	<% else %>
@@ -19,27 +20,76 @@
 		<% if @user.following?(current_user) %>
 			<p><%= @user.name %> is following you!</p>
 		<% end %>
+<% end %>
 
+<% if @user.has_friends? %>
+	<h2><%= @user.name %>'s Friends</h2>
+	<ul>
+	<% @user.friends.each do |friend| %>
+		<li><strong><%= link_to friend.name, user_path(friend) %></strong></li>
+	<% end %>
+	</ul>
+<% end %>
+
+
+<% if @user.has_followers? %>
+
+	<% if @user.followers_count < 1 %>
+		<h2><%= @user.followers.count %> people are following <%= @user.name %>:</h2>
+		<ul>
+		<% @user.followers.each do |follower| %>
+			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
+		<% end %>
+		</ul>
+	<% else %>
+		<h2>One person is following <%= @user.name %>:</h2>
+		<ul>
+		<% @user.followers.each do |follower| %>
+			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
+		<% end %>
+		</ul>
+	<% end %>
+
+<% else %>
+		<h2><%= @user.name %> has no followers. 😞</h2>
+<% end %>
+<br>
+<% if @user.has_following? %>
+
+	<% if @user.following_count > 1 %>
+		<h2><%= @user.name %> is following <%= @user.following.size %> people:</h2>
+		<ul>
+		<% @user.following.each do |followed| %>
+			<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
+		<% end %>
+		</ul>
+		<% else %>
+			<h2><%= @user.name %> is following one person:</h2>
+			<ul>
+			<% @user.following.each do |followed| %>
+				<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
+			<% end %>
+			</ul>	
+		<% end %>
+
+<% else %>
+		<h2><%= @user.name %> isn't following anyone. 😞</h2>
 <% end %>
 
 <br>
 
-<% if @user.posts %>
+<% if @user.posts.size > 0 %>
+
 	<h2><%= @user.name %>'s Posts</h2>
+
 	<% @user.posts.each do |post| %>
-		<li><div><%= link_to post.title, post.link, target: "_blank" %>
-		  <h3>Tags for this Post:</h3>
-  				<% post.tags.each do |tag| %>
-  		<li><%= tag.name %></li>
-  			<% end %>
-						<h3>Comments</h3>
-						<ul id="Comments">
-						<% post.comments.each do |comment| %>
-
-						<li><%= comment.message %></li>
-						<% end %></ul>
-
-		</div></li>
+		<%= render partial: 'posts/thumbnail', locals: {post: post} %>
+		<!-- <li><div# link_to post.title, post.link, target: "_blank" %> -->
+		<%= render partial: 'comments/comment', locals: {post: post} %>
 		<%= render partial: 'comments/form', locals: {post: post} %>
+
 	<% end %>
+	<% else %>
+		<h2>This user has no posts.</h2>
+
 <% end %>

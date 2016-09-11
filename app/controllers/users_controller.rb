@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show]
-  before_action :authorize_user, only: [:dashboard]
+  before_action :authorize_user, only: [:dashboard, :edit, :update]
 
   def index
     @users = User.all
   end
-  
+
   def edit
   end
   
@@ -23,7 +23,6 @@ class UsersController < ApplicationController
 
   def dashboard
   end
-
   
   private
  
