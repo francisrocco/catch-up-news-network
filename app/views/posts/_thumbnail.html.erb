@@ -14,6 +14,13 @@
     padding: 1px;
 }
 
+.edit_button{
+  position: absolute;
+  top: 0;
+  left: 420px;
+  padding : 10px;
+}
+
 .poster {
   /*position: absolute;*/
   text-align: center;
@@ -73,6 +80,9 @@ a {
 <div class='thumbnail'>
   &nbsp
   <div class="poster">
+  <div class="edit_button" >
+  <%= link_to "", edit_post_path(post), class: 'glyphicon glyphicon-wrench' %>
+  </div>
   <%= link_to post.get_poster_name, user_path(post.user) %>
   <%= link_to " posted " + post.get_post_date, post_path(post) %>
   </div>

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
     if current_user.update(user_params)
       flash[:notice] = "User information updated"
-      redirect_to edit_user_path
+      redirect_to user_path(current_user)
     else
       render "edit"
     end
