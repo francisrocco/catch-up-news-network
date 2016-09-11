@@ -1,5 +1,6 @@
-<div>
+<div class="errors">
 <% if @user.errors.any? %>
+	<h2>Woah there!</h2>
 	<% @user.errors.full_messages.each do |msg| %>
 		<%= msg %>
 	<% end %>
