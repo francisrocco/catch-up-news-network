@@ -53,6 +53,32 @@ class Post < ApplicationRecord
   def self.most_popular
     Post.joins(:votes).group('posts.id').order('SUM(votes.value) DESC')
   end
+  
+  #Methods to Query like and dislikes of post
+
+  def pos_votes
+    self.votes.where({value: 1})
+  end
+
+  def neg_votes
+    self.votes.where({value: -1})
+  end
+
+  def pos_ids
+    pos_votes.collect {|vote| vote.user_id}
+  end
+  
+  def neg_ids
+    neg_votes.collect {|vote| vote.user_id}
+  end
+
+  def pos_users
+    User.where({id: pos_ids})
+  end
+
+  def neg_users
+    User.where({id: neg_ids})
+  end
 
   # GETTING USER POSTS (some sister methods in User Model)
   # =======================================================

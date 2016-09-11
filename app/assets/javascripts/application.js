@@ -16,3 +16,10 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $('#myupToolTip').tooltip();
+});
+$(document).ready(function() {
+  $('#mydownToolTip').tooltip();
+});
