@@ -88,7 +88,7 @@ class Post < ApplicationRecord
     if is_new_post?
       "just now!"
     else
-      self.created_at.strftime('on %a, %D, at %l:%M %P')
+      self.created_at.strftime('on %a, %D @ %l:%M %P')
     end
   end
 
