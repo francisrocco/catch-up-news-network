@@ -20,7 +20,8 @@ class Post < ApplicationRecord
 
   def description
     desc = thumbnail.description
-    desc = self.title if thumbnail.images.first.src.to_s[-3..-1] != "jpg"
+    #i don't think this is super necessary anymore
+    # desc = self.title if !thumbnail.images.first.src.include?("jpg")
     if desc.length < 120
       return desc
     else
@@ -35,7 +36,7 @@ class Post < ApplicationRecord
   def image
     thumbnail = LinkThumbnailer.generate(self.link)
     img = thumbnail.images.first.src.to_s
-    if img[-3..-1] != "jpg"
+    if !img.include?("jpg")
       return "http://img00.deviantart.net/4854/i/2013/352/8/1/newspaper_collage_texture_by_flordeneu-d6yeuvs.jpg"
     else
       return img
