@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <title>404</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
@@ -51,17 +52,33 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  .emoji {
+/*  padding-top: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+  float: right;*/
+  text-align: center;
+  font-size: 60px;
+  color: #000;
+}
   </style>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </head>
 
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      <h1>WHAT ARE YOU DOING!!</h1>
+      <p> <span class="emoji">😲</span></p>
+      <button onclick="goBack()">Go back!</button>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <br>
   </div>
 </body>
 </html>

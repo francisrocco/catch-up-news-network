@@ -1,1 +1,5 @@
+<% if @user.errors.any? %>
+	<%= render partial: 'error', locals: {user: @user} %>
+<% end %>
+
 <%= render partial: 'registrations/form', locals: {user: @user, url: signup_path} %>

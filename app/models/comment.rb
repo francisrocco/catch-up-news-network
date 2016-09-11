@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
     if is_new_comment?
       "just now"
     else
-      self.created_at.strftime('on %a, %D at %l:%M %P')
+      self.created_at.strftime('on %a, %D @ %l:%M %P')
     end
   end
 
