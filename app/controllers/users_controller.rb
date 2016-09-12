@@ -3,12 +3,12 @@ class UsersController < ApplicationController
   before_action :authorize_user, only: [:dashboard, :edit, :update, :show]
 
   def index
-    @users = User.all
+    @users = User.all.paginate(:page => params[:page]|| 1, :per_page => 20)
   end
 
   def edit
   end
-  
+
   def update
     if current_user.update(user_params)
       flash[:notice] = "User information updated"
@@ -23,9 +23,9 @@ class UsersController < ApplicationController
 
   def dashboard
   end
-  
+
   private
- 
+
   def user_params
     params.require(:user).permit(:name, :email, :password)
   end
