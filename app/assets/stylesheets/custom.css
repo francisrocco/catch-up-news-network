@@ -1,10 +1,15 @@
- div.navbar-header h4 a:hover:after{
-  color: #d30;
-  font: 30px bold;
+ div.navbar-header h4 a:hover{
+  /*color: #ffb3ff;*/
+  font: 26px ;
   visibility: visible;
-  border: 5px orange solid;
-  content: "Fucking Work";
+  background-color: #00b3b3;
+  text-decoration: none;
 }
+
+div.navbar-header h4 a{
+  color: white;
+  visibility: visible;
+
 
 /* .container {
   margin-left: 135px
