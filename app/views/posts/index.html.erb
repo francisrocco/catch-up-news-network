@@ -1,8 +1,6 @@
 <h1>Latest News From Your Network</h1><Br><br>
 
-<% Post.all.each do |post| %>
-	<%= link_to post.title, post_path(post) %>
-<% end %>
+
 
 <% if @posts_by_user.count == 0 %>
   <h3>You don't have any posts to view! Get out there and <%= link_to "follow", users_path %> some more users!<h3>
