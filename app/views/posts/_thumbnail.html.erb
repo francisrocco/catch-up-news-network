@@ -9,8 +9,8 @@
     /*height: 330px;*/
     height: 30em; /* using ems because they scale acc. to font size */
 
-    overflow: auto;
-    background: #e5eff3;
+/*    overflow: auto;
+*/    background: #e5eff3;
 
     border: 1px solid black;
     padding: 1px;
@@ -90,6 +90,7 @@ a {
 <div class='thumbnail'>
   &nbsp
   <div class="poster">
+   
     <div class="edit_button" >
     <% if post.user.id == current_user.id %>
       <%= link_to "", edit_post_path(post), class: 'glyphicon glyphicon-wrench' %>
@@ -105,12 +106,15 @@ a {
   </div>
   <br>
   <a target="_blank" href="<%= post.link %>">
-  <div class='image'>
-    <img src="<%= post.image %>" width="450">
-      <div class='headline'>
-          <div class='short' color='black'><h3><%= post.post_title %></h3></div>
+  
+    <div class='image'>
+      <img src="<%= post.image %>" width="450">
+        <div class='headline'>
+            <div class='short' color='black'><h3><%= post.post_title %></h3></div>
+        </div>
     </div>
-  </div>
+
+    
   <div class="caption">
     <%= post.description %><br>
   </div>
@@ -119,19 +123,17 @@ a {
       <span class= "glyphicon glyphicon-thumbs-up"> </span>
     <% end %>
       &nbsp
-    <span id='post_<%=post.id%>_votes'>
+    <span id='post_<%=post.id %>_votes'>
       <strong><%= post.total_votes %></strong>
-    </span>
+    </span>   
       &nbsp
    <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %>
       <span class= "glyphicon glyphicon-thumbs-down"> </span>
     <% end %>
-      &nbsp
-
-    <% post.tags.each do |tag| %>
-      <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
-    <% end %>
-  </div>
+      <% post.tags.each do |tag| %>
+        <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
+      <% end %>
+    </div>
   </a>
 
 </div>

@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :votes, dependent: :destroy
   accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
-
+  
   def thumbnail
     @thumbnail ||= LinkThumbnailer.generate(self.link)
   end
@@ -47,7 +47,7 @@ class Post < ApplicationRecord
   end
 
   def total_votes
-    self.up_votes - self.down_votes
+   self.up_votes - self.down_votes
   end
 
   def self.most_popular
