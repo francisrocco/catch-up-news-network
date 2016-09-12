@@ -18,8 +18,8 @@
 
 
 $(document).ready(function() {
-  $('#myupToolTip').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
 });
-$(document).ready(function() {
-  $('#mydownToolTip').tooltip();
-});
+// $(document).ready(function() {
+//   $('#mydownToolTip').tooltip();
+// });
