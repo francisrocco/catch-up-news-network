@@ -15,32 +15,11 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-// $ (document).ready(function() {
-//   $('#myupToolTip').click(function() {
-//       $('.total_vote').html('<%= @post.total_votes %>');
-//   });
+
+
+$(document).ready(function() {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+// $(document).ready(function() {
+//   $('#mydownToolTip').tooltip();
 // });
-// $('.vote-arrows')
-//     .on('ajax:success', function (e, data, status, xhr) {
-//  $('.total_vote').html(@post.data);
-
-
-//     })
-//     .on('ajax:send', function () {
-//         $(this).addClass('loading');
-//     })
-//     .on('ajax:complete', function () {
-//         $(this).removeClass('loading');
-//     })
-//     .on('ajax:error', function (e, xhr, status, error) {
-//         console.log(status);
-//         console.log(error);
-//     })
-
-
-$(document).ready(function() {
-  $('#myupToolTip').tooltip();
-});
-$(document).ready(function() {
-  $('#mydownToolTip').tooltip();
-});
