@@ -1,6 +1,6 @@
-<h1><%= @user.name %></h1>
+<h1><%= @user.name %><%= " (You!)" if @user == current_user %></h1>
 
-<div id="notice">
+<div id="error">
 <% if flash[:error] %>
 	<%= render partial: '/registrations/error', locals: {flash_error: flash[:error]} %>
 <% elsif flash[:notice] %>
@@ -16,7 +16,7 @@
 	<% end %>
 
 	<% else %>
-		<%= link_to "Follow #{@user.name}!", follow_path(@user) %>
+		<%= link_to "Follow #{@user.name}!", follow_path(@user) if @user != current_user %>
 		<% if @user.following?(current_user) %>
 			<p><%= @user.name %> is following you!</p>
 		<% end %>
