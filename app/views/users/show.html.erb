@@ -34,7 +34,7 @@
 
 <% if @user.has_followers? %>
 
-	<% if @user.followers_count < 1 %>
+	<% if @user.followers_count > 1 %>
 		<h3><%= @user.followers.count %> people are following <%= @user.name %>:</h3>
 		<ul>
 		<% @user.followers.each do |follower| %>

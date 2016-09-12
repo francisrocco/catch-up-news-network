@@ -3,7 +3,12 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :votes, dependent: :destroy
-  accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
+  # accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
+  def tags_attributes=(args = {})
+    args.each do |num, tag| 
+      self.tags << Tag.find_or_create_by(name: tag['name']) unless tag['name'] == ""
+    end
+  end
 
   def thumbnail
     @thumbnail ||= LinkThumbnailer.generate(self.link)
@@ -47,7 +52,7 @@ class Post < ApplicationRecord
   end
 
   def total_votes
-    self.up_votes - self.down_votes
+   self.up_votes - self.down_votes
   end
 
   def self.most_popular
@@ -111,6 +116,10 @@ class Post < ApplicationRecord
     end
   end
 
+  # def autosave_associated_records_for_tags
+  #   byebug
+  # end
+
   private
 
     # only admin need this method
@@ -119,6 +128,8 @@ class Post < ApplicationRecord
       followed.get_user_posts
     end
   end
+
+
 
 
 end
