@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   $('.new_follow_link').on('ajax:success', function(data) {
-     $('#' + data.target.id).html("<div class='glyphicon glyphicon-check' style='color:#00ff00'></div>");
+     $('#' + data.target.id).html("<span class='glyphicon glyphicon-check' style='color:#00ff00'>Followed!</span>");
   });
 
 });
