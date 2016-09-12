@@ -1,0 +1,24 @@
+<h1>Welcome, <%= current_user.name %>!</h1>
+
+<% if current_user.posts.size < 0 %>
+	<h2>Your Posts</h2>
+	<% current_user.posts.each do |post| %>
+		<div>
+			<%= link_to post.title, post.link, target: "_blank" %>
+		  <h3>Tags for this Post:</h3>
+			<% post.tags.each do |tag| %>
+  			<li><%= tag.name %></li>
+			<% end %>
+			<h3>Comments</h3>
+			<ul id="Comments">
+			<% post.comments.each do |comment| %>
+				<li><%= comment.message %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+<% else %>
+<h2>You haven't posted anything.</h2>
+<h2>Make a Post</h2>
+<%= render partial: 'posts/form', locals: {post: Post.new} %>
+<% end %>
