@@ -3,7 +3,6 @@
 
 <ul>
 <% @users.each do |user| %>
-	<!-- on profile, we can decide how much we reveal to the current user! ooooohhhh some ankle, huh? -->
-	<li><strong><%= link_to user.name, user_path(user) %></strong> | <%= link_to 'Follow This User', follow_path(user) %></li>
+	<li><strong><%= link_to user.name, user_path(user) %></strong> <% if !user.followers.include?(current_user) %><%= link_to '| Follow This User', follow_path(user), :remote => true, :id => "new_follow_link" %><% end %></li>
 <% end %>
 </ul>

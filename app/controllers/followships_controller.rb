@@ -4,17 +4,11 @@ class FollowshipsController < ApplicationController
 
   def follow
     user = User.find(params[:id])
-    # Later we can just get rid of follow links for users you're already following
-    if user.followed_by?(current_user)
-      flash[:error] = "You're already following this user!"
-      redirect_to user_path(user)
-    elsif user == current_user
-      flash[:error] = "You can't follow yourself, silly!"
-      redirect_to user_path(user)
-    else
-      current_user.follow(user)
-      flash[:notice] = "You just followed #{user.name}!"
-      redirect_to user_path(user)
+
+    current_user.follow(user)
+    respond_to do |f|
+      f.js
+      f.html { redirect_to root_path }
     end
   end
 
