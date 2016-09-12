@@ -5,7 +5,9 @@ class Post < ApplicationRecord
   has_many :votes, dependent: :destroy
   # accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
   def tags_attributes=(args = {})
-    args.each {|num, tag| self.tags << Tag.find_or_create_by(name: tag['name']) unless tag['name'] == ""}
+    args.each do |num, tag| 
+      self.tags << Tag.find_or_create_by(name: tag['name']) unless tag['name'] == ""
+    end
   end
 
   def thumbnail
