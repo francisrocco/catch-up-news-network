@@ -11,8 +11,19 @@ class Post < ApplicationRecord
   end
 
   def thumbnail
+    binding.pry
     @thumbnail ||= LinkThumbnailer.generate(self.link)
+      if @thumbnail.description == nil
+        @thumbnail.description = "I like cats."
+      end
+      if @thumbnail.favicon == ""
+        @thumbnail.favicon = "uh"
+      end
+      if @thumbnail.images == []
+        @thumbnail.images = ['http://d39kbiy71leyho.cloudfront.net/wp-content/uploads/2016/05/09170020/cats-politics-TN.jpg']
+      end
   end
+
 
   def post_title
     return self.title unless title = thumbnail.title
@@ -33,13 +44,13 @@ class Post < ApplicationRecord
   end
 
   def favicon
-    thumbnail.favicon
+    favicon = thumbnail.favicon
   end
 
   def image
-    thumbnail = LinkThumbnailer.generate(self.link)
-    img = thumbnail.images.first.src.to_s
+    image = thumbnail.images.first.src.to_s
   end
+
 
   #Methods for Votes function
 
