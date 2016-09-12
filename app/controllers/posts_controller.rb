@@ -40,7 +40,8 @@ class PostsController < ApplicationController
   end
 
   def update
-        respond_to do |format|
+      respond_to do |format|
+      @post.tags.destroy_all
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
@@ -64,7 +65,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, tag_ids: [], :tags_attributes => [:name])
+    params.require(:post).permit(:title, :link, :tags_attributes => [:name, :id])
   end
 
 end
