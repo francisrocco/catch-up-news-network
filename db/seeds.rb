@@ -55,10 +55,10 @@ Tag.create(name: "helpful")
 Post.all.each do |post|
 	post.tags = Tag.all.sample(2)
 end
-1000.times do
+10000.times do
 Post.all.sample.votes << Vote.new(user_id: User.all.sample.id, value: 1)
 end
 
-750.times do
+7500.times do
 	Post.all.sample.votes << Vote.new(user_id: User.all.sample.id, value: (-1))
 end
