@@ -10,11 +10,11 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: login_params[:email])
-    # binding.pry
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       redirect_to posts_path
     else
+      flash[:notice] = "Wrong email / password!"
       render :new
     end
   end

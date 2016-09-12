@@ -6,12 +6,28 @@
     /* image 450px + 1px margin-R + 1px margin-R + 1px padding-R + 1px padding-L = 454px */
     /* gets rid of icky side scrolling */
     width: 454px;
-    /*height: 330px;*/   
+    /*height: 330px;*/
     height: 30em; /* using ems because they scale acc. to font size */
+
 /*    overflow: auto;
-*/    background: lightgray;
+*/    background: #e5eff3;
+
     border: 1px solid black;
     padding: 1px;
+}
+
+.edit_button{
+  position: absolute;
+  top: 0;
+  left: 420px;
+  padding : 10px;
+}
+
+.delete_button{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding : 10px;
 }
 
 .poster {
@@ -74,8 +90,19 @@ a {
 <div class='thumbnail'>
   &nbsp
   <div class="poster">
-   <%= link_to post.get_poster_name, user_path(post.user) %>
-   <%= link_to " posted " + post.get_post_date, post_path(post) %>
+   
+    <div class="edit_button" >
+    <% if post.user.id == current_user.id %>
+      <%= link_to "", edit_post_path(post), class: 'glyphicon glyphicon-wrench' %>
+    <% end %>
+    </div>
+    <div class="delete_button" >
+    <% if post.user.id == current_user.id %>
+      <%= link_to "", post_path(post), method: :delete, class: 'glyphicon glyphicon-trash' %>
+    <% end %>
+    </div>
+  <%= link_to post.get_poster_name, user_path(post.user) %>
+  <%= link_to " posted " + post.get_post_date, post_path(post) %>
   </div>
   <br>
   <a target="_blank" href="<%= post.link %>">
@@ -87,20 +114,20 @@ a {
         </div>
     </div>
 
-    <div class="caption">
-      <%= post.description %><br>
-    </div>
     
-   <div class='vote-arrows pull-left bottom-portion'>
-    <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %> 
-        <span class= "glyphicon glyphicon-thumbs-up"> </span>
+  <div class="caption">
+    <%= post.description %><br>
+  </div>
+ <div class='vote-arrows pull-left bottom-portion'>
+    <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %>
+      <span class= "glyphicon glyphicon-thumbs-up"> </span>
     <% end %>
       &nbsp
     <span id='post_<%=post.id %>_votes'>
       <strong><%= post.total_votes %></strong>
     </span>   
       &nbsp
-   <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %> 
+   <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %>
       <span class= "glyphicon glyphicon-thumbs-down"> </span>
     <% end %>
       <% post.tags.each do |tag| %>
@@ -109,4 +136,4 @@ a {
     </div>
   </a>
 
-</div> 
+</div>

@@ -11,21 +11,19 @@ class Post < ApplicationRecord
 
   def post_title
     return self.title unless title = thumbnail.title
-    if title.length < 35
+    if title.length < 60
       return title
     else
-      return title[0..33] + "..."
+      return title[0..57] + "..."
     end
   end
 
   def description
     desc = thumbnail.description
-    #i don't think this is super necessary anymore
-    # desc = self.title if !thumbnail.images.first.src.include?("jpg")
-    if desc.length < 120
+    if desc.length < 110
       return desc
     else
-      return desc[0..117] + "..."
+      return desc[0..107] + "..."
     end
   end
 
@@ -36,13 +34,7 @@ class Post < ApplicationRecord
   def image
     thumbnail = LinkThumbnailer.generate(self.link)
     img = thumbnail.images.first.src.to_s
-    if !img.include?("jpg")
-      return "http://img00.deviantart.net/4854/i/2013/352/8/1/newspaper_collage_texture_by_flordeneu-d6yeuvs.jpg"
-    else
-      return img
-    end
   end
-
 
   #Methods for Votes function
 
@@ -114,7 +106,7 @@ class Post < ApplicationRecord
     if is_new_post?
       "just now!"
     else
-      self.created_at.strftime('on %a, %D, at %l:%M %P')
+      self.created_at.strftime('on %a, %D @ %l:%M %P')
     end
   end
 

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
 	def authorize_user
 	  if !logged_in?
-  		flash[:notice] = "You have to be logged in to view this page!"
+  		flash[:notice] = "You must be logged in to view this page! Cool kids only! 😍"
 	    redirect_to login_path
 	  end
 	end
