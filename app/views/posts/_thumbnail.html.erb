@@ -8,7 +8,6 @@
     width: 454px;
     /*height: 330px;*/
     height: 28em; /* using ems because they scale acc. to font size */
-    overflow: auto;
     background: #e5eff3;
     border: 1px solid black;
     padding: 1px;
@@ -128,6 +127,7 @@ a {
    <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %>
       <span class= "glyphicon glyphicon-thumbs-down"> </span>
     <% end %>
+    &nbsp
       <% post.tags.each do |tag| %>
         <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
       <% end %>
