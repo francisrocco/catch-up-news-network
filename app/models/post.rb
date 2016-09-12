@@ -11,11 +11,20 @@ class Post < ApplicationRecord
   end
 
   def thumbnail
-    @thumbnail ||= LinkThumbnailer.generate(self.link)
+    begin
+      @thumbnail = LinkThumbnailer.generate(self.link)
+    rescue LinkThumbnailer::Exceptions => e
+      self.errors[:messages] << e
+      # let's create a default thumbnail for bad links
+      # because regexes won't screen fake links
+      return @thumbnail = LinkThumbnailer.generate('http://www.theonion.com/article/god-rewinds-time-watch-man-fall-trampoline-again-53919')
+    end
   end
 
+
   def post_title
-    return self.title unless title = thumbnail.title
+    # makes one less request than using thumbnail.title
+    return self.title unless title == @thumbnail.title
     if title.length < 60
       return title
     else
@@ -24,7 +33,8 @@ class Post < ApplicationRecord
   end
 
   def description
-    desc = thumbnail.description
+    # makes one less request than using thumbnail.description
+    desc = @thumbnail.description
     if desc.length < 110
       return desc
     else
@@ -33,13 +43,15 @@ class Post < ApplicationRecord
   end
 
   def favicon
-    thumbnail.favicon
+    # doesn't work with @thumbnail.favicon
+    favicon = thumbnail.favicon
   end
 
   def image
-    thumbnail = LinkThumbnailer.generate(self.link)
-    img = thumbnail.images.first.src.to_s
+    # doesn't work with @thumbnail.images
+    image = thumbnail.images.first.src.to_s
   end
+
 
   #Methods for Votes function
 
@@ -99,7 +111,8 @@ class Post < ApplicationRecord
 
   # post.get_poster_name #=> jabba_the_hutt_b0i__460
   def get_poster_name
-    User.joins(:posts).where(posts: {id: self.id}).pluck(:name).take(1).join
+    self.user.name
+    # User.joins(:posts).where(posts: {id: self.id}).pluck(:name).take(1).join
   end
 
   def is_new_post?

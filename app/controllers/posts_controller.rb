@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:index, :show]
+  before_action :authorize_user, only: [:index, :show, :dashboard]
   before_action :set_limit_vote, only: [:up_vote, :down_vote]
-
 
   def new
     @post = Post.new
@@ -14,6 +13,9 @@ class PostsController < ApplicationController
   def index
     # @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
     @posts_by_user = Post.get_user_posts_by_following(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+  end
+
+  def dashboard
   end
 
   def show
