@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:index, :show]
   before_action :set_limit_vote, only: [:up_vote, :down_vote]
 
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
       render :new
     end
   end
-  
+
 
   def edit
     unless @post.user == current_user
@@ -53,10 +53,12 @@ class PostsController < ApplicationController
 
 
   def destroy
+    @post.destroy
+    redirect_to user_path(@post.user)
   end
 
   private
-  
+
   def set_post
     @post = Post.find(params[:id])
   end
