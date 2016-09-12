@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   resources :users
   resources :posts do
   	get '/posts', to: 'posts#index'
-	 post '/up_vote' => 'votes#up_vote', as: :up_vote
-  post '/down_vote' => 'votes#down_vote', as: :down_vote
+    post '/up_vote' => 'votes#up_vote', as: :up_vote
+    post '/down_vote' => 'votes#down_vote', as: :down_vote
 
   end
+  get '/my-posts', to: 'posts#dashboard', as: 'my_posts'
 
   resources :comments, only: [:new, :create]
 
