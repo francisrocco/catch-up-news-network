@@ -74,38 +74,39 @@ a {
 <div class='thumbnail'>
   &nbsp
   <div class="poster">
-  <%= link_to post.get_poster_name, user_path(post.user) %>
-  <%= link_to " posted " + post.get_post_date, post_path(post) %>
+   <%= link_to post.get_poster_name, user_path(post.user) %>
+   <%= link_to " posted " + post.get_post_date, post_path(post) %>
   </div>
   <br>
   <a target="_blank" href="<%= post.link %>">
-  <div class='image'>
-    <img src="<%= post.image %>" width="450">
-      <div class='headline'>
-          <div class='short' color='black'><h3><%= post.post_title %></h3></div>
+  
+    <div class='image'>
+      <img src="<%= post.image %>" width="450">
+        <div class='headline'>
+            <div class='short' color='black'><h3><%= post.post_title %></h3></div>
+        </div>
     </div>
-  </div>
-  <div class="caption">
-    <%= post.description %><br>
-  </div>
- <div class='vote-arrows pull-left bottom-portion'>
+
+    <div class="caption">
+      <%= post.description %><br>
+    </div>
+    
+   <div class='vote-arrows pull-left bottom-portion'>
     <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %> 
-      <span class= "glyphicon glyphicon-thumbs-up"> </span>
+        <span class= "glyphicon glyphicon-thumbs-up"> </span>
     <% end %>
       &nbsp
-    <span id='post_<%=post.id%>_votes'>
+    <span id='post_<%=post.id %>_votes'>
       <strong><%= post.total_votes %></strong>
-    </span>
+    </span>   
       &nbsp
    <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %> 
       <span class= "glyphicon glyphicon-thumbs-down"> </span>
     <% end %>
-      &nbsp
-
-    <% post.tags.each do |tag| %>
-      <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
-    <% end %>
-  </div>
+      <% post.tags.each do |tag| %>
+        <a href="/tags/<%= "#{tag.id}" %>"><button class="button"><%= "#{tag.name}" %></button></a>
+      <% end %>
+    </div>
   </a>
 
 </div> 
