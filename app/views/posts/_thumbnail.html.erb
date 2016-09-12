@@ -27,6 +27,13 @@
   padding : 10px;
 }
 
+.comments{
+  position: absolute;
+  bottom: 10px;
+  left: 400px;
+  padding: 10px;
+}
+
 .poster {
   /*position: absolute;*/
   text-align: center;
@@ -112,10 +119,15 @@ a {
     </div>
 
 
+
+
   <div class="caption">
     <%= post.description %><br>
   </div>
  <div class='vote-arrows pull-left bottom-portion'>
+     <div class='comments'>
+      <%= link_to "", post_path(post), class: 'glyphicon glyphicon-comment' %>&nbsp<strong><%= post.comments.count %></strong>
+    </div>
     <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %>
       <span class= "glyphicon glyphicon-thumbs-up"> </span>
     <% end %>
