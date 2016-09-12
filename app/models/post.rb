@@ -11,22 +11,20 @@ class Post < ApplicationRecord
   end
 
   def thumbnail
-    binding.pry
-    @thumbnail ||= LinkThumbnailer.generate(self.link)
-      if @thumbnail.description == nil
-        @thumbnail.description = "I like cats."
-      end
-      if @thumbnail.favicon == ""
-        @thumbnail.favicon = "uh"
-      end
-      if @thumbnail.images == []
-        @thumbnail.images = ['http://d39kbiy71leyho.cloudfront.net/wp-content/uploads/2016/05/09170020/cats-politics-TN.jpg']
-      end
+    begin
+      @thumbnail = LinkThumbnailer.generate(self.link)
+    rescue LinkThumbnailer::Exceptions => e
+      self.errors[:messages] << e
+      # let's create a default thumbnail for bad links
+      # because regexes won't screen fake links
+      return @thumbnail = LinkThumbnailer.generate('http://www.theonion.com/article/god-rewinds-time-watch-man-fall-trampoline-again-53919')
+    end
   end
 
 
   def post_title
-    return self.title unless title = thumbnail.title
+    # makes one less request than using thumbnail.title
+    return self.title unless title == @thumbnail.title
     if title.length < 60
       return title
     else
@@ -35,7 +33,8 @@ class Post < ApplicationRecord
   end
 
   def description
-    desc = thumbnail.description
+    # makes one less request than using thumbnail.description
+    desc = @thumbnail.description
     if desc.length < 110
       return desc
     else
@@ -44,10 +43,12 @@ class Post < ApplicationRecord
   end
 
   def favicon
+    # doesn't work with @thumbnail.favicon
     favicon = thumbnail.favicon
   end
 
   def image
+    # doesn't work with @thumbnail.images
     image = thumbnail.images.first.src.to_s
   end
 
