@@ -94,7 +94,8 @@ class Post < ApplicationRecord
 
   # post.get_poster_name #=> jabba_the_hutt_b0i__460
   def get_poster_name
-    User.joins(:posts).where(posts: {id: self.id}).pluck(:name).take(1).join
+    self.user.name
+    # User.joins(:posts).where(posts: {id: self.id}).pluck(:name).take(1).join
   end
 
   def is_new_post?
