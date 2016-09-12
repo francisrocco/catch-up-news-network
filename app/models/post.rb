@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :votes, dependent: :destroy
   # accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
   def tags_attributes=(args = {})
-    args.each do |num, tag| 
+    args.each do |num, tag|
       self.tags << Tag.find_or_create_by(name: tag['name']) unless tag['name'] == ""
     end
   end
@@ -13,7 +13,7 @@ class Post < ApplicationRecord
   def thumbnail
     begin
       @thumbnail = LinkThumbnailer.generate(self.link)
-    rescue LinkThumbnailer::Exceptions => e
+      rescue LinkThumbnailer::Exceptions => e
       self.errors[:messages] << e
       # let's create a default thumbnail for bad links
       # because regexes won't screen fake links
@@ -24,7 +24,8 @@ class Post < ApplicationRecord
 
   def post_title
     # makes one less request than using thumbnail.title
-    return self.title unless title == @thumbnail.title
+    title = self.title unless @thumbnail.title
+    title = @thumbnail.title
     if title.length < 60
       return title
     else
@@ -70,7 +71,7 @@ class Post < ApplicationRecord
   def self.most_popular
     Post.joins(:votes).group('posts.id').order('SUM(votes.value) DESC')
   end
-  
+
   #Methods to Query like and dislikes of post
 
   def pos_votes
@@ -84,7 +85,7 @@ class Post < ApplicationRecord
   def pos_ids
     pos_votes.collect {|vote| vote.user_id}
   end
-  
+
   def neg_ids
     neg_votes.collect {|vote| vote.user_id}
   end
