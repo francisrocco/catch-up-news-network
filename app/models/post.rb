@@ -52,7 +52,7 @@ class Post < ApplicationRecord
   end
 
   def total_votes
-    self.up_votes - self.down_votes
+   self.up_votes - self.down_votes
   end
 
   def self.most_popular
