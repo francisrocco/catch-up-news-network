@@ -7,6 +7,9 @@ class User < ApplicationRecord
 	has_many :followerships, foreign_key: 'follower_id', class_name: 'Followship'
 	has_many :followingships, foreign_key: 'following_id', class_name: 'Followship'
 
+	has_many :followers, through: :followingships
+	has_many :following, through: :followerships
+
 	# Validations
 	# ============
 	validates :name, uniqueness: true, presence: true, length: { minimum: 3, maximum: 25 }
@@ -34,19 +37,19 @@ class User < ApplicationRecord
   end
 
 	# return everyone following self
-  def followers
-  	# this returns an array, which is a bit inconvenient
-  	# self.class.find_by_sql(['SELECT * FROM users JOIN followships ON users.id = followships.following_id WHERE followships.following_id = ?', self.id])
+ #  def followers
+ #  	# this returns an array, which is a bit inconvenient
+ #  	# self.class.find_by_sql(['SELECT * FROM users JOIN followships ON users.id = followships.following_id WHERE followships.following_id = ?', self.id])
 
-  	# but this returns an activerecord relation!
-  	self.class.joins(:followerships).where(followships: {following_id: self.id})
-  end
+ #  	# but this returns an activerecord relation!
+ #  	self.class.joins(:followerships).where(followships: {following_id: self.id})
+ #  end
 
-	# return everyone that self is following
-	# later, we need another method that returns followings and followers who are NOT friends with self	
-  def following
-    self.class.joins(:followingships).where(followships: {follower_id: self.id})
-  end
+	# # return everyone that self is following
+	# # later, we need another method that returns followings and followers who are NOT friends with self	
+ #  def following
+ #    self.class.joins(:followingships).where(followships: {follower_id: self.id})
+ #  end
 
   def followers_count
   	followers.count
