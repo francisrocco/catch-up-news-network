@@ -1,9 +1,15 @@
 <h1>Who's Online?</h1>
 
-
 <ul>
 <% @users.each do |user| %>
-	<li><strong><%= link_to user.name, user_path(user) %></strong> <% if !user.followers.include?(current_user) %><%= link_to '| Follow This User', follow_path(user), method: 'POST', 'data-type' => 'json', :remote => true, :class => "new_follow_link", :id => "#{user.id}-follow" %><% end %></li>
+	<li>
+		<strong><%= link_to user.name, user_path(user) %></strong>
+		<% if user != current_user %>
+			<% if !user.followers.include?(current_user) %>
+				<%= link_to ' | Follow This User', follow_path(user), method: 'POST', 'data-type' => 'json', :remote => true, :class => "new_follow_link", :id => "#{user.id}-follow" %>
+			<% end %>
+		<% end %>
+	</li>
 <% end %>
 </ul>
 
