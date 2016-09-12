@@ -110,6 +110,14 @@ class Post < ApplicationRecord
     Post.where(user_id: following_ids).order('created_at DESC')
   end
 
+  def self.all_posts_for_index(user)
+    all_user_ids = []
+    all_user_ids << user.following_ids
+    all_user_ids << user.id
+    all_user_ids.flatten!
+     Post.where(user_id: all_user_ids).order('created_at DESC')
+  end
+
   # post.get_poster_name #=> jabba_the_hutt_b0i__460
   def get_poster_name
     self.user.name
