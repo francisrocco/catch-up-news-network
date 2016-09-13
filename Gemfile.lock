@@ -154,6 +154,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redis (3.3.0)
     ruby-ll (2.1.2)
       ansi
       ast
@@ -221,6 +222,7 @@ DEPENDENCIES
   pry
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+  redis (~> 3.0)
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)

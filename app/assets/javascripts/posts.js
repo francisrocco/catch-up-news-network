@@ -13,3 +13,4 @@ jQuery(function() {
     source: $('#tag-field-3').data('autocomplete-source')
   });
 });
+

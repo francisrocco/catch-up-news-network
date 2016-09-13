@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//= require ./channels/comments.js
+//= require ./channels/posts.js
 
 
 $(document).ready(function() {
