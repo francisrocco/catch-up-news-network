@@ -8,9 +8,15 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to post_path(@comment.post)
-    else
-      flash[:notice] = "You can't post that!"
+      ActionCable.server.broadcast 'comments',
+        comment: @comment.message,
+        datetime: @comment.datetime,
+        user: @comment.user.name,
+        user_id: @comment.user.id
+      head :ok
+    # else
+    #   flash[:notice] = "You can't post that!"
+    #   render 'post/show'
     end
   end
 

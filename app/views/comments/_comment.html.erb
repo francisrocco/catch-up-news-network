@@ -8,6 +8,7 @@
 
 <% if post.comments.size > 0 %>
 	<h3>Comments</h3>
+	<div id="comments">
 	<% post.comments.reverse_each do |comment| %>
 		<p>
 		<span class="comment">
@@ -19,6 +20,7 @@
 		</span>
 		</p>
 	<% end %>
+	</div>
 <% else %>
 	<h3>No comments yet. Start a conversation!</h3>
 <% end %>
