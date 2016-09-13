@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:new, :create]
 
-  resources :tags, only: [:show]
+  resources :tags, only: [:index, :show]
 
   root 'application#home'
 

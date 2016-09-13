@@ -13,7 +13,9 @@ class PostsController < ApplicationController
   def index
     # @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
     @all_posts = Post.all_posts_for_index(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+    
   end
+
 
   def dashboard
     @current_user_posts = Post.get_user_posts(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
