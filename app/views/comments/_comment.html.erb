@@ -12,7 +12,7 @@
 		<p>
 		<span class="comment">
 		<strong>
-			<%= link_to comment.author, user_path(comment.author) %>
+			<%= link_to comment.author, user_path(comment.user.id) %>
 			<%= comment.datetime + ': ' %>
 		</strong>
 		<%= comment.message %>
