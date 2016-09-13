@@ -4,10 +4,11 @@
 		background: #fff;
 	}
 
+
 </style>
 
-<h3>Comments</h3>
-<div id="comments">
+<center><h3>Comments</h3></center>
+<center><div id="comments">
 
 	<% if post.comments.size > 0 %>
 		<% post.comments.reverse_each do |comment| %>
@@ -25,4 +26,4 @@
 		<h3>No comments yet. Start a conversation!</h3>
 	<% end %>
 
-</div>
+</div></center>
