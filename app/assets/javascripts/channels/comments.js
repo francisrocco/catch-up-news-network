@@ -1,7 +1,7 @@
 App.comments = App.cable.subscriptions.create('CommentsChannel', {  
   received: function(data) {
   	debugger;
-    return $('#comments').prepend(this.renderComment(data));
+    return $('#comments').append(this.renderComment(data));
   	debugger;
   },
 
