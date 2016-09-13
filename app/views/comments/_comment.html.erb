@@ -6,9 +6,9 @@
 
 </style>
 
+	<div id="comments">
 <% if post.comments.size > 0 %>
 	<h3>Comments</h3>
-	<div id="comments">
 	<% post.comments.reverse_each do |comment| %>
 		<p>
 		<span class="comment">
