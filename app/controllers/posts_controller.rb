@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def dashboard
-    @current_user_posts = Post.get_user_posts(current_user)
+    @current_user_posts = Post.get_user_posts(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
   def show

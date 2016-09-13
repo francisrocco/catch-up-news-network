@@ -14,7 +14,7 @@
       <%= tag_form.text_field :name, data: { autocomplete_source: Tag.order(:name).map(&:name)}, id: "tag-field-#{i}", placeholder: "Add a New Tag" %>
       <% i += 1 %>
     <% end %>
-  </div>
+  </div><br>
 
   <%= f.submit %>
 <% end %>
