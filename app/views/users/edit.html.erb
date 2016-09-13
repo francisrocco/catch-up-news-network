@@ -1,1 +1,28 @@
-<%= render partial: 'form', locals: {user: current_user} %>
+<h2>Edit Your Profile</h2>
+
+
+<% if flash[:error] %>
+	<%= render partial: 'registrations/error', locals: {flash_error: flash[:error]} %>
+<% end %>
+
+<div class='well'>
+<%= form_for current_user do |f| %>
+<div class='control-group'>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+</div>
+<div class='control-group'>
+	<%= f.label :email %>
+	<%= f.text_field :email %>
+</div>
+<div class='control-group'>
+	<%= f.label 'Original Password:' %>
+	<%= f.password_field :password, id: "original password", name: "user[original_password]" %>
+</div>
+<div class='control-group'>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+</div>
+	<%= f.submit class: 'btn-btn-primary'%>
+<% end %>
+

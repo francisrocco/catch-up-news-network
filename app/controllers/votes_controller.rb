@@ -11,7 +11,6 @@ class VotesController < ApplicationController
     else
       @vote = current_user.votes.create(value: 1, post: @post)
       @vote.save
-        flash[:notice] = "Successfully upvoted."
         respond_to do |format| 
           format.html do
             if @vote.valid?
@@ -32,7 +31,6 @@ class VotesController < ApplicationController
     else
       @vote = current_user.votes.create(value: -1, post: @post)
       @vote.save
-        flash[:notice] = "Successfully upvoted."
         respond_to do |format| 
           format.html do
             if @vote.valid?
