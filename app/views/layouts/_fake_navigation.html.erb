@@ -10,7 +10,22 @@
         <!-- This can change when we deploy, but for now... -->
         <li><%= link_to "Browse Other Users", users_path %></li>
         <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+    
+        <li>
+     <form class="navbar-form navbar-left">
+            <div class="form-group">
+            <%= form_tag(tags_path, :method => "get", id: "search-form", class: "form-control") do %>
+            <%= text_field_tag :search, params[:search], placeholder: "Search Tags" %>
+          <%= submit_tag "Search" %>
+          <% end %>
+
+            </div>
+          </form>
+
+        </li>
+
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <li>
           <%= link_to('', class: 'btn btn-small dropdown-toggle',
@@ -42,7 +57,8 @@
         <li> <%= link_to "Sign-up", signup_path %></li>
         <li> <%= link_to "Log-in", login_path %></li>
       </ul>
-     </div>
+
+    </div>
    <% end %>
   </div>
 </nav>

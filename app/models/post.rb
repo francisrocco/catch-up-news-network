@@ -53,6 +53,11 @@ class Post < ApplicationRecord
     image = thumbnail.images.first.src.to_s
   end
 
+#method for SEARCH function
+def self.search(search)
+  where("name LIKE ?", "%#{search}%") 
+  where("content LIKE ?", "%#{search}%")
+end
 
   #Methods for Votes function
 
