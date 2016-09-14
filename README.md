@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the Catch Up News Network. A social network for people who want to read the news based on articles their friends recommend. A user can sign up, post articles, and follow other users to view their shared articles.
 
-Things you may want to cover:
+This was a project built by this repos collaborators at the Flatiron School to showcase some key concepts recently learned, including:
 
-* Ruby version
+* Relationships and associations between multiple models
 
-* System dependencies
+* Asynchronous JavaScript and XML calls
 
-* Configuration
+* WebSockets / ActionCable
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+and numerous other Ruby on Rails techniques.
