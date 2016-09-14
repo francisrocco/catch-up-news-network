@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user_show_items = UserDecorator.create
   end
 
   def dashboard
