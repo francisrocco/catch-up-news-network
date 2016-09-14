@@ -1,27 +1,21 @@
-<style>
+<h3>Comments</h3>
 
+<div class="comments_container">
+	<div id="comments">
 
+			<% if post.comments.size > 0 %>
+				<% post.comments.reverse_each do |comment| %>
+					<p class="comment">
+					<strong>
+						<%= link_to comment.author, user_path(comment.user.id) %>
+						<%= comment.datetime + ': ' %>
+					</strong>
+					<%= comment.message %>
+					</p>
+				<% end %>
+			<% else %>
+				<h3>No comments yet. Start a conversation!</h3>
+			<% end %>
 
-
-</style>
-
-<center><h3>Comments</h3></center>
-<center><div id="comments">
-
-	<% if post.comments.size > 0 %>
-		<% post.comments.reverse_each do |comment| %>
-			<p>
-			<span class="comment">
-			<strong>
-				<%= link_to comment.author, user_path(comment.user.id) %>
-				<%= comment.datetime + ': ' %>
-			</strong>
-			<%= comment.message %>
-			</span>
-			</p>
-		<% end %>
-	<% else %>
-		<h3>No comments yet. Start a conversation!</h3>
-	<% end %>
-
-</div></center>
+	</div>
+</div>

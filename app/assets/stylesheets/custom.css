@@ -1,11 +1,12 @@
 
 body {
+   background: #f3f3f3;
    padding: 0;
    margin: 0;
  }
 
-body {
-   background: #f3f3f3;
+h3 {
+  text-align: center;
  }
 
 footer {
@@ -98,6 +99,14 @@ nav {
 
 /*Comment CSS*/
 
+.comments_container {
+  width: 50%;
+  padding: 20px;
+  margin: auto;
+}
+
 .comment {
-  background: #fff;
+  width: auto;
+  position: relative;
+  text-align: justify;
 }
