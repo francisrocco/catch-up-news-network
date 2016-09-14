@@ -9,17 +9,7 @@
 </div>
 
 
-<%= @user_show_items.get_user_relationship %>
-
-<% if @user.has_friends? %>
-	<h3><%= @user.name %>'s Friends</h3>
-	<ul>
-	<% @user.friends.each do |friend| %>
-		<li><strong><%= link_to friend.name, user_path(friend) %></strong></li>
-	<% end %>
-	</ul>
-<% end %>
-
+<%= @user.display_user_relationship(@user, current_user) %>
 
 <% if @user.has_followers? %>
 

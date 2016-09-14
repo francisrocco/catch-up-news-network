@@ -1,22 +1,18 @@
 class UserDecorator < SimpleDelegator
 
-	def display_user_relationship
-		if current_user.friends_with?(user)
-			return "You're both friends!"
-		end
 
-		
+	# make a user view helper
+	# def display_user_relationship(user, current_user)
+	# 	if current_user.friends_with?(user)
+	# 		return "You're both friends!"
+	# 	end
 
-
-
-
-# <% if current_user.following?(@user) %>
-
-# 	<% if current_user.followed_by?(@user) %>
-# 		<p>You're both friends!</p>
-# 	<% else %>
-# 		<p>You're following <%= @user.name %>!</p>
-# 	<% end %>
+	# 	if current_user.following?(user)
+	# 		return "You're following #{user}!"
+	# 	elsif current_user.followed_by?(user)
+	# 		return "#{user} is following you!"
+	# 	end
+	# end
 
 # 	<% else %>
 # 		<%= link_to "Follow #{@user.name}!", follow_path(@user), method: 'post','data-type' => 'json', :remote => true, :class => "new_follow_link", :id => "#{@user.id}-follow" if @user != current_user %>
@@ -27,6 +23,5 @@ class UserDecorator < SimpleDelegator
 
 
 
-	end
 
 end

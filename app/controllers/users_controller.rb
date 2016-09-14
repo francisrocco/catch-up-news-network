@@ -29,7 +29,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_show_items = UserDecorator.create
+    @user = UserDecorator.new(@user, current_user)
+    binding.pry
   end
 
   def dashboard
