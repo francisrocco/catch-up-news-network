@@ -1,6 +1,4 @@
-<center><h1>Welcome, <%= current_user.name %>!</h1></center><Br><br>
-
-
+<h1>Welcome, <%= current_user.name %>!</h1>
 
 <% if @current_user_posts.count == 0 %>
   <h3>You haven't posted anything yet! <%= link_to "Post", new_post_path %> something! <h3>
