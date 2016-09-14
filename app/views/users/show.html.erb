@@ -8,8 +8,14 @@
 <% end %>
 </div>
 
+<div class="align-text">
 
-<%= @user.display_user_relationship(@user, current_user) %>
+<%= display_user_relationship(@user, current_user) %>
+
+<%= display_follow_link(@user, current_user) { link_to "Follow #{@user.name}!", follow_path(@user), method: 'post','data-type' => 'json', :remote => true, :class => "new_follow_link", :id => "#{@user.id}-follow" } %>
+
+</div>
+
 
 <% if @user.has_followers? %>
 
@@ -62,10 +68,10 @@
 	<h3><%= @user.name %>'s Posts</h3><br>
 
 	<% @user.posts.each do |post| %>
-		<%= render partial: 'posts/thumbnail', locals: {post: post} %>
-		<!-- <li><div# link_to post.title, post.link, target: "_blank" %> -->
-		<%= render partial: 'comments/comment', locals: {post: post} %>
-		<%= render partial: 'comments/form', locals: {post: post} %>
+		<%#= render partial: 'posts/thumbnail', locals: {post: post} %>
+		<li><div# link_to post.title, post.link, target: "_blank" %>
+		<%#= render partial: 'comments/comment', locals: {post: post} %>
+		<%#= render partial: 'comments/form', locals: {post: post} %>
 		<br>
 	<% end %>
 	<% else %>
