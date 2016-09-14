@@ -11,18 +11,15 @@ class PostsController < ApplicationController
   end
 
   def index
-    # @posts = Post.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
-    @all_posts = Post.all_posts_for_index(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
-    
+    @all_posts = Post.all_posts_for_index(current_user).paginate_posts   
   end
 
 
   def dashboard
-    @current_user_posts = Post.get_user_posts(current_user).paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
+    @current_user_posts = Post.get_user_posts(current_user).paginate_posts
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def create
@@ -66,11 +63,16 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = ThumbnailDecorator.new(Post.find(params[:id]))
   end
 
   def post_params
     params.require(:post).permit(:title, :link, :tags_attributes => [:name, :id])
+  end
+
+
+  def paginate_posts
+    self.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
   end
 
 end
