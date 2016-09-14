@@ -131,15 +131,15 @@ a {
      <div class='comments'>
       <%= link_to "", post_path(post), class: 'glyphicon glyphicon-comment' %>&nbsp<strong><%= post.comments.count %></strong>
     </div>
-    <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.pos_users.map(&:name).to_sentence do %>
+    <%= link_to post_up_vote_path(post), method: :post, remote: true, id: "myupToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.up_voters.map(&:name).to_sentence do %>
       <span class= "glyphicon glyphicon-thumbs-up"> </span>
     <% end %>
       &nbsp
     <span id='post_<%=post.id %>_votes'>
-      <strong><%= post.total_votes %></strong>
+      <strong><%= post.popularity %></strong>
     </span>
       &nbsp
-   <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.neg_users.map(&:name).to_sentence do %>
+   <%= link_to post_down_vote_path(post), method: :post, remote: true, id: "mydownToolTip", :title => "", :"data-toggle" => "tooltip", :"data-placement" => "top" , :'data-original-title' => post.down_voters.map(&:name).to_sentence do %>
       <span class= "glyphicon glyphicon-thumbs-down"> </span>
     <% end %>
     &nbsp
