@@ -29,6 +29,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = UserDecorator.new(@user, current_user)
+    binding.pry
   end
 
   def dashboard

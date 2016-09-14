@@ -1,20 +1,21 @@
 <%= form_for post do |f| %>
   <div class="field">
-    <%= f.text_area :title, placeholder: "Title" %><br>
+    <%= f.text_field :title, placeholder: "Title" %><br>
   </div>
 
   <div class="field">
-    <%= f.text_area :link, placeholder: "Link" %><br>
+    <%= f.text_field :link, placeholder: "Link" %><br>
   </div>
-
+  <br>
   <div class="field", autocomplete="off">
-    <% i = 1 %>
     <p>Tag This Post:</p>
+    <% i = 1 %>
     <%= f.fields_for(:tags, @post.tags) do |tag_form| %>
       <%= tag_form.text_field :name, data: { autocomplete_source: Tag.order(:name).map(&:name)}, id: "tag-field-#{i}", placeholder: "Add a New Tag" %>
       <% i += 1 %>
     <% end %>
-  </div><br>
+  </div>
+  <br>
 
   <%= f.submit %>
 <% end %>

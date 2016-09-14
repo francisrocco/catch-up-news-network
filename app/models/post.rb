@@ -61,16 +61,10 @@ end
 
   #Methods for Votes function
 
-  def up_votes
-    votes.where(value: 1).count
-  end
-
-  def down_votes
-    votes.where(value: -1).count
-  end
-
-  def total_votes
-   self.up_votes - self.down_votes
+  def popularity
+    pop = 0
+    self.votes.each {|vote| pop += vote.value}
+    pop
   end
 
   def self.most_popular
@@ -79,29 +73,14 @@ end
 
   #Methods to Query like and dislikes of post
 
-  def pos_votes
-    self.votes.where({value: 1})
+  def up_voters
+    self.votes.where({value: 1}).collect {|vote| vote.user}
   end
 
-  def neg_votes
-    self.votes.where({value: -1})
+  def down_voters
+    self.votes.where({value: -1}).collect {|vote| vote.user}
   end
 
-  def pos_ids
-    pos_votes.collect {|vote| vote.user_id}
-  end
-
-  def neg_ids
-    neg_votes.collect {|vote| vote.user_id}
-  end
-
-  def pos_users
-    User.where({id: pos_ids})
-  end
-
-  def neg_users
-    User.where({id: neg_ids})
-  end
 
   # GETTING USER POSTS (some sister methods in User Model)
   # =======================================================

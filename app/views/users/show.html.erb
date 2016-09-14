@@ -8,29 +8,8 @@
 <% end %>
 </div>
 
-<% if current_user.following?(@user) %>
-	<% if current_user.followed_by?(@user) %>
-		<p>You're both friends!</p>
-	<% else %>
-		<p>You're following <%= @user.name %>!</p>
-	<% end %>
 
-	<% else %>
-		<%= link_to "Follow #{@user.name}!", follow_path(@user), method: 'post','data-type' => 'json', :remote => true, :class => "new_follow_link", :id => "#{@user.id}-follow" if @user != current_user %>
-		<% if @user.following?(current_user) %>
-			<p><%= @user.name %> is following you!</p>
-		<% end %>
-<% end %>
-
-<% if @user.has_friends? %>
-	<h3><%= @user.name %>'s Friends</h3>
-	<ul>
-	<% @user.friends.each do |friend| %>
-		<li><strong><%= link_to friend.name, user_path(friend) %></strong></li>
-	<% end %>
-	</ul>
-<% end %>
-
+<%= @user.display_user_relationship(@user, current_user) %>
 
 <% if @user.has_followers? %>
 
