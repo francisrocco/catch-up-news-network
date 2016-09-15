@@ -1,8 +1,8 @@
-# README
+# Catch Up News Network
 
-This is the Catch Up News Network. A social network for people who want to read the news based on articles their friends recommend. A user can sign up, post articles, and follow other users to view their shared articles.
+A mock social network for people to post and share news with their friends. Users can follow each other, upvote and downvote posts, and discuss current events via websocket-enabled comments.
 
-This was a project built by this repository's collaborators at the Flatiron School to showcase some key concepts recently learned, including:
+This project was built by this repository's collaborators at the Flatiron School (July - Oct 2016) to showcase various key concepts:
 
 * Relationships and complex associations between multiple models
 
@@ -10,4 +10,4 @@ This was a project built by this repository's collaborators at the Flatiron Scho
 
 * WebSockets / ActionCable
 
-and numerous other Ruby on Rails techniques.
+and other Ruby on Rails techniques.
