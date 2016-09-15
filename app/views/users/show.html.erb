@@ -44,9 +44,9 @@
 	<h3><%= @user.name %>'s Posts</h3><br>
 
 	<% @user.posts.each do |post| %>
-		<%#= render partial: 'posts/thumbnail', locals: {post: post} %>
-		<%#= render partial: 'comments/comment', locals: {post: post} %>
-		<%#= render partial: 'comments/form', locals: {post: post} %>
+		<%= render partial: 'posts/thumbnail', locals: {post: post} %>
+		<%= render partial: 'comments/comment', locals: {post: post} %>
+		<%= render partial: 'comments/form', locals: {post: post} %>
 	<% end %>
 	<% else %>
 		<h3>This user has no posts.</h3>
