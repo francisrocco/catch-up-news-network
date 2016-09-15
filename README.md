@@ -1,24 +1,15 @@
-# README
+# Catch Up News Network
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A mock social network for people to post and share news with their friends. Users can follow each other, upvote and downvote posts, and discuss current events via websocket-enabled comments.
 
-Things you may want to cover:
+This project was built by this repository's collaborators at the Flatiron School (July - Oct 2016) to showcase various key concepts:
 
-* Ruby version
+* Relationships and complex associations between multiple models
 
-* System dependencies
+* Asynchronous JavaScript and XML calls
 
-* Configuration
+* WebSockets / ActionCable
 
-* Database creation
+and other Ruby on Rails techniques.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Check out the live version [here](https://catch-up-news-network.herokuapp.com/).

@@ -1,5 +1,35 @@
- div.navbar-header h4 a:hover{
-  /*color: #ffb3ff;*/
+
+body {
+   background: #f3f3f3;
+   padding: 0;
+   margin: 0;
+ }
+
+h1, h2, h3 {
+  text-align: center;
+ }
+
+footer {
+   background: #7f7f7f;
+   margin: 0;
+   padding: 5px;
+   border-top: 2px solid #a6a6a6;
+ }
+
+footer h4 {
+ font-weight: 200;
+ color: #bfbfbf;
+ font-size: 14px;
+}
+
+footer a, footer a:hover {
+ color: #bfbfbf;
+}
+
+
+/* Navbar CSS */
+
+div.navbar-header h4 a:hover{
   font: 26px ;
   visibility: visible;
   background-color: #00b3b3;
@@ -11,63 +41,24 @@ div.navbar-header h4 a{
   visibility: visible;
 }
 
-/* .container {
-  margin-left: 135px
-}*/
-/*
-.navbar .nav > li > a.brand {
-  padding-left: 0px;
-}*/
-// body {
-//   padding: 0;
-//   margin: 0;
-// }
-//
-// body {
-//   background: #f3f3f3;
-// }
-//
-// nav a {
-//  color: #bfbfbf;
-// }
-//
-// nav {
-//   background: #7f7f7f;
-//
-//
-//   /*border: none !important;
-//   border-radius: 0 !important;
-//   margin-bottom: 0 !important;
-//   position: fixed !important;
-//   width: 100% !important;
-//   z-index: 1000 !important;*/
-//   margin: 0;
-//   padding: 5px;
-//   border-top: 2px solid #a6a6a6;
-//
-// }
-//
-// footer {
-//   background: #7f7f7f;
-//   margin: 0;
-//   padding: 5px;
-//   border-top: 2px solid #a6a6a6;
-// }
-//
-// footer h4 {
-//   font-weight: 200;
-//   color: #bfbfbf;
-//   font-size: 14px;
-// }
-//
-// footer a, footer a:hover {
-//   color: #bfbfbf;
-// }
-/*div.nav_item {
-  margin-left: 25px;
-  float: left;
-}*/
+nav a {
+color: #bfbfbf;
+}
 
+nav {
+ background: #7f7f7f;
+
+ /*border: none !important;
+ border-radius: 0 !important;
+ margin-bottom: 0 !important;
+ position: fixed !important;
+ width: 100% !important;
+ z-index: 1000 !important;*/
+ margin: 0;
+ padding: 5px;
+ border-top: 2px solid #a6a6a6;
+
+}
 
 /* error formatting
 ======================*/
@@ -104,4 +95,18 @@ div.navbar-header h4 a{
 
 .errors span {
   color: #000;
+}
+
+/*Comment CSS*/
+
+.comments_container {
+  width: 50%;
+  padding: 20px;
+  margin: auto;
+}
+
+.comment {
+  width: auto;
+  position: relative;
+  text-align: justify;
 }

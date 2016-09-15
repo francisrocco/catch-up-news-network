@@ -1,4 +1,6 @@
-<h1><%= @user.name %><%= " (You!)" if @user == current_user %></h1>
+<h1>
+	<%= @user.name %><%= " (You!)" if @user == current_user %>
+</h1>
 
 <div id="error">
 <% if flash[:error] %>
@@ -8,73 +10,32 @@
 <% end %>
 </div>
 
-<% if current_user.following?(@user) %>
-	<% if current_user.followed_by?(@user) %>
-		<p>You're both friends!</p>
-	<% else %>
-		<p>You're following <%= @user.name %>!</p>
-	<% end %>
+<div class="text-center">
 
-	<% else %>
-		<%= link_to "Follow #{@user.name}!", follow_path(@user), method: 'post','data-type' => 'json', :remote => true, :class => "new_follow_link", :id => "#{@user.id}-follow" if @user != current_user %>
-		<% if @user.following?(current_user) %>
-			<p><%= @user.name %> is following you!</p>
-		<% end %>
-<% end %>
+	<%= display_user_relationship(@user, current_user) %>
 
-<% if @user.has_friends? %>
-	<h3><%= @user.name %>'s Friends</h3>
-	<ul>
-	<% @user.friends.each do |friend| %>
-		<li><strong><%= link_to friend.name, user_path(friend) %></strong></li>
-	<% end %>
-	</ul>
-<% end %>
+	<%= display_follow_link(@user, current_user) { link_to "Follow #{@user.name}!", follow_path(@user), method: 'post','data-type' => 'json', :remote => true, :class => "new_follow_link text-center", :id => "#{@user.id}-follow" } %>
 
+	<h3><%= display_user_followers(@user) %></h3>
 
-<% if @user.has_followers? %>
-
-	<% if @user.followers_count > 1 %>
-		<h3><%= @user.followers.count %> people are following <%= @user.name %>:</h3>
-		<ul>
+	<% if @user.has_followers? %>
 		<% @user.followers.each do |follower| %>
-			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
+			<li>
+			<strong><%= link_to follower.name, user_path(follower) %></strong>
+			</li>
 		<% end %>
-		</ul>
-	<% else %>
-		<h3>One person is following <%= @user.name %>:</h3>
-		<ul>
-		<% @user.followers.each do |follower| %>
-			<li><strong><%= link_to follower.name, user_path(follower) %></strong></li>
-		<% end %>
-		</ul>
 	<% end %>
 
-<% else %>
-		<h3><%= @user.name %> has no followers. 😞</h3>
-<% end %>
-<br>
-<% if @user.has_following? %>
+	<h3><%= display_user_following(@user) %></h3>
 
-	<% if @user.following_count > 1 %>
-		<h3><%= @user.name %> is following <%= @user.following.size %> people:</h3>
-		<ul>
+	<% if @user.has_following? %>
 		<% @user.following.each do |followed| %>
-			<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
+			<li>
+			<strong><%= link_to followed.name, user_path(followed) %></strong>
+			</li>
 		<% end %>
-		</ul>
-		<% else %>
-			<h3><%= @user.name %> is following one person:</h3>
-			<ul>
-			<% @user.following.each do |followed| %>
-				<li><strong><%= link_to followed.name, user_path(followed) %></strong></li>
-			<% end %>
-			</ul>
-		<% end %>
-
-<% else %>
-		<h3><%= @user.name %> isn't following anyone. 😞</h3>
-<% end %>
+	<% end %>	
+</div>
 
 <br>
 
@@ -83,11 +44,9 @@
 	<h3><%= @user.name %>'s Posts</h3><br>
 
 	<% @user.posts.each do |post| %>
-		<%= render partial: 'posts/thumbnail', locals: {post: post} %>
-		<!-- <li><div# link_to post.title, post.link, target: "_blank" %> -->
-		<%= render partial: 'comments/comment', locals: {post: post} %>
-		<%= render partial: 'comments/form', locals: {post: post} %>
-		<br>
+		<%#= render partial: 'posts/thumbnail', locals: {post: post} %>
+		<%#= render partial: 'comments/comment', locals: {post: post} %>
+		<%#= render partial: 'comments/form', locals: {post: post} %>
 	<% end %>
 	<% else %>
 		<h3>This user has no posts.</h3>
