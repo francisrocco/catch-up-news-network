@@ -12,4 +12,4 @@ This project was built by this repository's collaborators at the Flatiron School
 
 and other Ruby on Rails techniques.
 
-Check out out the live version [here](https://catch-up-news-network.herokuapp.com/).
+Check out the live version [here](https://catch-up-news-network.herokuapp.com/).
