@@ -6,9 +6,9 @@ module UsersHelper
 		end
 
 		if current_user.following?(user)
-			return "You're following #{user}!"
+			return "You're following #{user.name}!"
 		elsif current_user.followed_by?(user)
-			return "#{user} is following you!"
+			return "#{user.name} is following you!"
 		end
 	end
 
