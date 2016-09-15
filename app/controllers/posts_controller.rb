@@ -11,12 +11,12 @@ class PostsController < ApplicationController
   end
 
   def index
-    @all_posts = Post.all_posts_for_index(current_user).paginate_posts   
+    @all_posts = PostPaginator.all_posts(current_user, params)  
   end
 
 
   def dashboard
-    @current_user_posts = Post.get_user_posts(current_user).paginate_posts
+    @current_user_posts = PostPaginator.get_user_posts(current_user, params)
   end
 
   def show
@@ -60,6 +60,7 @@ class PostsController < ApplicationController
     redirect_to user_path(@post.user)
   end
 
+
   private
 
   def set_post
@@ -70,9 +71,5 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :link, :tags_attributes => [:name, :id])
   end
 
-
-  def paginate_posts
-    self.paginate(:page => params[:page]|| 1, :per_page => 5).order('created_at DESC')
-  end
 
 end

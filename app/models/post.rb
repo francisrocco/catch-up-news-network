@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :votes, dependent: :destroy
+  
   # accepts_nested_attributes_for :tags, reject_if: lambda {|attributes| attributes['name'].blank?}
   def tags_attributes=(args = {})
     args.each do |num, tag|
@@ -10,16 +11,7 @@ class Post < ApplicationRecord
     end
   end
 
-  def thumbnail
-    begin
-      @thumbnail = LinkThumbnailer.generate(self.link)
-      rescue LinkThumbnailer::Exceptions => e
-      self.errors[:messages] << e
-      # let's create a default thumbnail for bad links
-      # because regexes won't screen fake links
-      return @thumbnail = LinkThumbnailer.generate('http://www.theonion.com/article/god-rewinds-time-watch-man-fall-trampoline-again-53919')
-    end
-  end
+  
 
 
 #method for SEARCH function
@@ -89,7 +81,7 @@ end
     all_user_ids << user.following_ids
     all_user_ids << user.id
     all_user_ids.flatten!
-     Post.where(user_id: all_user_ids).order('created_at DESC')
+    Post.where(user_id: all_user_ids).order('created_at DESC')
   end
 
   # post.get_poster_name #=> jabba_the_hutt_b0i__460

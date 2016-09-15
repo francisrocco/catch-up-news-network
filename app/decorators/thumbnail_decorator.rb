@@ -1,5 +1,16 @@
 class ThumbnailDecorator < SimpleDelegator
 
+ def thumbnail
+    begin
+      @thumbnail = LinkThumbnailer.generate(self.link)
+      rescue LinkThumbnailer::Exceptions => e
+      self.errors[:messages] << e
+      # let's create a default thumbnail for bad links
+      # because regexes won't screen fake links
+      return @thumbnail = LinkThumbnailer.generate('http://www.theonion.com/article/god-rewinds-time-watch-man-fall-trampoline-again-53919')
+    end
+  end
+
   def post_title
     # makes one less request than using thumbnail.title
     title = self.title unless @thumbnail.title
