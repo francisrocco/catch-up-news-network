@@ -11,3 +11,5 @@ This project was built by this repository's collaborators at the Flatiron School
 * WebSockets / ActionCable
 
 and other Ruby on Rails techniques.
+
+Check out out the live version [here](https://catch-up-news-network.herokuapp.com/).
