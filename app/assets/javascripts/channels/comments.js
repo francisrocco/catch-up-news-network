@@ -9,7 +9,7 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
     var horn = $('#audio');
     horn.get(0).play();
   	$('textarea').val('');
-  	return "<p class='comment'> <strong>" + "<a href='users/" + data.user_id + "'>" + data.user + "</a> " + data.datetime + ": </strong>" + data.comment + "</p>"
+  	return "<p class='comment'> <strong>" + "<a href='/users/" + data.user_id + "'>" + data.user + "</a> " + data.datetime + ": </strong>" + data.comment + "</p>"
   	
 
   }
